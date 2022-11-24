@@ -7,7 +7,7 @@ app.secret_key = "5saf151d5f16adf"
 
 
 @app.route("/login/google")
-def loginApp():
+def login_app():
     return google.login()
 
 
