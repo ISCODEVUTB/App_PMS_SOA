@@ -12,7 +12,7 @@ def clear():
 
 def show_car():
     data = [(i.idProduct, i.name, i.supName, i.price, i.motor, i.gearbox, i.security) for i in model]
-    if data is not None:
+    if data != None:
         return jsonify({'number of products in shopping cart': len(data), 'total price': price_total()})
     else:
         return jsonify({'message: "There are no data'})
