@@ -12,7 +12,7 @@ def clear():
 
 def show_car():
     data = [(i.idProduct, i.name, i.supName, i.price, i.motor, i.gearbox, i.security) for i in model]
-    if data != 0:
+    if data is not None:
         return jsonify({'number of products in shopping cart': len(data), 'total price': price_total()})
     else:
         return jsonify({'messeger: "There are no data'})
@@ -24,7 +24,7 @@ def show_list():
     return jsonify({'shopping cart': data, 'total price': price_total()})
 
 
-def into_shopcar(mysql, idProduct):
+def into_shopcar(mysql, id_product):
     cursor = mysql.connection.cursor()
     cursor.execute("select v.name, su.name, s.selling_price, v.motor, v.gearbox, v.security "
                    "from stock s inner join vehicle v on (s.name = v.id)"
