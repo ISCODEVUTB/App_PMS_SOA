@@ -12,12 +12,12 @@ def loginApp():
 
 
 @app.route("/callback")
-def callbackApp():
+def callback_app():
     return google.callback()
 
 
 @app.route("/logout")
-def logoutApp():    
+def logout_app():    
     return google.logout()
 
 
@@ -31,7 +31,7 @@ def protect():
 
 # login with name 
 @app.route("/a")
-def loginApp_a():
+def login_app_a():
     pass
 
 
