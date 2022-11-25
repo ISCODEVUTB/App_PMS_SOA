@@ -36,4 +36,4 @@ def verify():
     try:
         return jsonify({"User": validate_token(token_info(), output=True)})
     except ValueError:
-        return jsonify({"Message": "error", "Change": "Word"})
+        return jsonify({"Message": "error"})
