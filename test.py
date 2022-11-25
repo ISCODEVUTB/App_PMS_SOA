@@ -11,9 +11,6 @@ class BasicTest(unittest.TestCase):
         self.assertEqual(c, 15)
 
 
-<<<<<<< HEAD
+
 if __name__ == '_main_':
-=======
-if __name__ == 'main':
->>>>>>> 6d7eac1b75fa2862abc9a95ba0071ba11da54862
     unittest.main()
