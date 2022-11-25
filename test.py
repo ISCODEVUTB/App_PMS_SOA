@@ -1,18 +1,14 @@
 import unittest
-import requests
+from app import app
 
 
-class TestAppi(unittest.TestCase):
-    URL = "https://servicio-stock.onrender.com/vehiculos"
-
-    def test_1_get_all(self):
-        resp = requests.get(self.URL)
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(len(resp.json()), 2)
-        print("Test 1 completed")
+class BasicTest(unittest.TestCase):
+    def text_index(self):
+        tester = app.test_client(self)
+        resp = tester.get('https://servicio-stock.onrender.com/vehiculos')
+        code = resp.status_code
+        self.assertEqual(code, 200)
 
 
-if __name__ == 'main':
-    tester = TestAppi()
-
-    tester.test_1_get_all()
+if __name__ == '_main_':
+    unittest.main()
