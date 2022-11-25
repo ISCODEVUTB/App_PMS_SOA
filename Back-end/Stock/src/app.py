@@ -1,6 +1,5 @@
 # we invoke the necessary libraries
-from flask import Flask, render_template, jsonify, request
-# from config import config
+from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 import controller
 
@@ -59,10 +58,6 @@ def delete_stock(id):
     except Exception as ex:
         return jsonify({'message': ex})
 
-
-# A function is created to show when a page is not found.
-def page_not_found(error):
-    return render_template('404.html')
 
 
 # the application is executed
