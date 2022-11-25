@@ -1,5 +1,5 @@
 import unittest
-from app import app
+import requests
 
 
 def suma(a, b):
@@ -7,15 +7,14 @@ def suma(a, b):
 
 
 class BasicTest(unittest.TestCase):
-    def setUp(self):
-        self.app = app.test_client()
 
     def test1(self):
         c = suma(5, 10)
         self.assertEqual(c, 15)
 
     def app_prueba(self):
-        r = self.app.get('https://servicio-stock.onrender.com/vehiculo', follow_redirects=True)
+        URL = 'https://servicio-stock.onrender.com/vehiculo'
+        r = requests.get(URL)
         self.assertEqual(r.status_code, 200)
 
 
