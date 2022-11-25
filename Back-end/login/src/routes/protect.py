@@ -19,7 +19,7 @@ def verify_token_middleware():
 def index():
     try:
         return jsonify({"Message": request.args.get('username')})
-    except:
+    except ValueError:
         return jsonify({"Message": "Error"})
 
 
@@ -27,7 +27,7 @@ def index():
 def update():
     try:
         return jsonify({"Message": "Welcome tu update"})
-    except:
+    except ValueError:
         return jsonify({"Message": "Error"})
 
 
@@ -35,5 +35,5 @@ def update():
 def verify():
     try:
         return jsonify({"User": validate_token(token_info(), output=True)})
-    except:
+    except ValueError:
         return jsonify({"Message": "error"})
