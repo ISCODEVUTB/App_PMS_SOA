@@ -13,6 +13,4 @@ class TestAppi(unittest.TestCase):
 
 
 if __name__ == 'main':
-    tester = TestAppi()
-
-    tester.test_1_get_all()
+    unittest.main()
