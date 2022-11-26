@@ -14,5 +14,5 @@ server.register_blueprint(protect, url_prefix="/api")
 
 
 if __name__ == '__main__':
-    server.secret_key= "KQSFKGNIJSOPDGBIOMOP"
+    server.secret_key = "KQSFKGNIJSOPDGBIOMOP"
     server.run(debug=True, port=3000, host="0.0.0.0")
