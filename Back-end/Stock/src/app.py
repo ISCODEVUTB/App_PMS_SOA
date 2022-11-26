@@ -18,7 +18,7 @@ mysql = MySQL(server)
 
 
 # The route to enter the service is created.
-@server.get('/vehicle')
+@server.get('/vehicles')
 def index():
     try:
         return controller.stock(mysql)
@@ -30,7 +30,7 @@ def index():
 @server.get('/vehicle/<string:name>')
 def get_vehicle(name):
     try:
-        return controller.vehicle(mysql, name)
+       return controller.vehicle(mysql, name)
     except Exception as ex:
         return jsonify({'message': ex})
 
