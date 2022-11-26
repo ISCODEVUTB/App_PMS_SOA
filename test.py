@@ -2,7 +2,7 @@ import unittest
 import requests
 
 
-class ApiTest(unittest.TestCase):
+class ApiTestStock(unittest.TestCase):
     API_URL = "https://servicio-stock.onrender.com/"
     vehicles = "{}/vehicles".format(API_URL)
     vehicle = "{}/vehicle".format(API_URL)
@@ -23,17 +23,31 @@ class ApiTest(unittest.TestCase):
     }
 
     def test_1_get_all_vehicles(self):
-        r = requests.get(ApiTest.vehicles)
+        r = requests.get(ApiTestStock.vehicles)
         self.assertEqual(r.status_code, 200)
 
     def test_2_create_vehicle(self):
-        r = requests.post(ApiTest.vehicle, json=ApiTest.vehicle_object)
+        r = requests.post(ApiTestStock.vehicle, json=ApiTestStock.vehicle_object)
         self.assertEqual(r.status_code, 200)
 
     def test_3_create_stock(self):
-        r = requests.post(ApiTest.stock, json=ApiTest.stock_object)
+        r = requests.post(ApiTestStock.stock, json=ApiTestStock.stock_object)
         self.assertEqual(r.status_code, 200)
 
     def test_4_delete_stock(self):
-        r = requests.delete(ApiTest.stock_delete)
+        r = requests.delete(ApiTestStock.stock_delete)
+        self.assertEqual(r.status_code, 200)
+
+
+class TestAppiSupplier(unittest.TestCase):
+    API_URL = 'https://servicio-suplier.onrender.com'
+    supplier = "{}/supplier".format(API_URL)
+    delete_supplier = "{}/supplier/4".format(API_URL)
+
+    def test_5_get_all_supplier(self):
+        r = requests.get(TestAppiSupplier.supplier)
+        self.assertEqual(r.status_code, 200)
+
+    def test_6_delete_supplier(self):
+        r = requests.delete(TestAppiSupplier.delete_supplier)
         self.assertEqual(r.status_code, 200)
