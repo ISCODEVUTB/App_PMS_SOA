@@ -26,17 +26,17 @@ def delete_supplier(mysql, idSupplier):
         cursor = mysql.connection.cursor()
         cursor.execute("delete from supplier where idsupplier = (%s)", (idSupplier,))
         data = cursor.fetchall()
-        print("Provider to be deleted: ", (data))
+        print("Provider to be deleted: ", data)
         cursor.execute("select idsupplier, name, nit, address, phone, email from supplier where idsupplier = (%s)",
-                     (idSupplier,))
+                     (idSupplier))
         mysql.connection.commit()
         return show_supplier(mysql)
     except Exception as ex:
-        return jsonify({'message: "Error'})
+        return jsonify({'message': ex})
 
 
 # This function updates a data of a supplier
-def updateSupplier(mysql, idSupplier):
+def update_supplier(mysql, idSupplier):
     try:
         cursor = mysql.connection.cursor()
         cursor.execute("update supplier set name = '{0}', nit = '{1}', address = '{2}', phone = '{3}',"

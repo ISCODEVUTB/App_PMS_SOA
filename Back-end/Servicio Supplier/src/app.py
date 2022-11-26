@@ -1,5 +1,5 @@
 # we invoke the necessary libraries
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 import contraller
 
@@ -29,7 +29,7 @@ def supplier_delete(id):
     try:
         return contraller.delete_supplier(mysql, id)
     except Exception as ex:
-        return page_not_found(ex)
+        return jsonify({"Message": ex})
 
 
 # this route is created to update data of this service
@@ -38,12 +38,7 @@ def supplier_update(id):
     try:
         return contraller.update_supplier(mysql, id)
     except Exception as ex:
-        return page_not_found(ex)
-
-
-# A function is created to show when a page is not found.
-def page_not_found(error):
-    return render_template('404.html')
+        return jsonify({"message": ex})
 
 
 # the application is executed
