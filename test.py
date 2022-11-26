@@ -35,5 +35,5 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
 
     def test_4_delete_stock(self):
-        r = requests.delete(ApiTest.stock)
+        r = requests.delete(ApiTest.stock_delete)
         self.assertEqual(r.status_code, 200)
