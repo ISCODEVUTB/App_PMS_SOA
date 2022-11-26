@@ -7,6 +7,7 @@ class ApiTest(unittest.TestCase):
     vehicles = "{}/vehicles".format(API_URL)
     vehicle = "{}/vehicle".format(API_URL)
     stock = "{}/stock".format(API_URL)
+    stock_delete = "{}/stock/4".format(API_URL)
     vehicle_object = {
             "name": "Onix Turbo RS 2023",
             "motor": "MOTOR TURBO 115 HP TORQUE 160 NM",
@@ -33,3 +34,6 @@ class ApiTest(unittest.TestCase):
         r = requests.post(ApiTest.stock, json=ApiTest.stock_object)
         self.assertEqual(r.status_code, 200)
 
+    def test_4_delete_stock(self):
+        r = requests.delete(ApiTest.stock)
+        self.assertEqual(r.status_code, 200)
