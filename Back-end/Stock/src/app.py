@@ -4,9 +4,12 @@ from flask_mysqldb import MySQL
 import controller
 from dotenv import load_dotenv
 from os import getenv
+from flask_wtf.csrf import CSRFProtect
 
 # The access point is created
 server = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(server)
 
 # The connection point to the base is created.
 server.config['MYSQL_HOST'] = getenv('HOST')
