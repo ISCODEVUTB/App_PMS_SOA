@@ -2,15 +2,17 @@
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 import contraller
+from dotenv import load_dotenv
+from os import getenv
 
 # The access point is created
 server = Flask(__name__)
 
 # The connection point to the base is created
-server.config['MYSQL_HOST'] = 'us-cdbr-east-06.cleardb.net'
-server.config['MYSQL_USER'] = 'bee0e9755133d2'
-server.config['MYSQL_PASSWORD'] = 'f3e9360a'
-server.config['MYSQL_DB'] = 'heroku_23edc9681868d22'
+server.config['MYSQL_HOST'] = getenv('HOST')
+server.config['MYSQL_USER'] = getenv('USER')
+server.config['MYSQL_PASSWORD'] = getenv('PASSWORD')
+server.config['MYSQL_DB'] = getenv('BD')
 mysql = MySQL(server)
 
 
@@ -43,4 +45,5 @@ def supplier_update(id):
 
 # the application is executed
 if __name__ == '__main__':
+    load_dotenv()
     server.run(debug=True)

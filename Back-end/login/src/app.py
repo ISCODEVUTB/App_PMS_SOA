@@ -5,7 +5,7 @@ from routes.protect import protect
 from dotenv import load_dotenv
 from os import getenv
 
-server = Flask(getenv('ACCESS'))
+server = Flask(__name__)
 server.config['MYSQL_HOST'] = getenv('HOST')
 server.config['MYSQL_USER'] = getenv('USER')
 server.config['MYSQL_PASSWORD'] = getenv('PASSWORD')
