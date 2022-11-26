@@ -8,12 +8,12 @@ from os import getenv
 # The access point is created
 server = Flask(__name__)
 
-
 # The connection point to the base is created.
 server.config['MYSQL_HOST'] = getenv('HOST')
 server.config['MYSQL_USER'] = getenv('USER')
 server.config['MYSQL_PASSWORD'] = getenv('PASSWORD')
 server.config['MYSQL_DB'] = getenv('BD')
+server.config['WTF_CSRF_ENABLED'] = getenv('PROTECT')
 mysql = MySQL(server)
 
 
