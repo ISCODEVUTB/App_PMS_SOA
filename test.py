@@ -2,13 +2,11 @@ import unittest
 import requests
 
 
-class BasicTest(unittest.TestCase):
+class ApiTest(unittest.TestCase):
+    API_URL = "https://servicio-stock.onrender.com/"
+    URL = "{}/vehicles".format(API_URL)
 
-    def index(self):
-        URL = 'https://servicio-stock.onrender.com/vehiculos'
-        res = requests.get(self.URL)
-        self.assertEqual(res.status_code, 200)
+    def test_1_get_all_vehicles(self):
+        r = requests.get(ApiTest.URL)
+        self.assertEqual(r.status_code, 200)
 
-
-if __name__ == '_main_':
-    unittest.main()
