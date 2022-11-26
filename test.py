@@ -43,6 +43,14 @@ class TestAppiSupplier(unittest.TestCase):
     API_URL = 'https://servicio-suplier.onrender.com'
     supplier = "{}/supplier".format(API_URL)
     delete_supplier = "{}/supplier/4".format(API_URL)
+    update_supplier = "{}/supplier/4".format(API_URL)
+    update_object = {
+        "name": "Toyota",
+        "nit": "9007805105",
+        "address": "CARRERA 9 A 99 02 OFFICE 602, Bogota, Colombia",
+        "phone": "01 8000 123 691",
+        "email": "clientes@toyota.com.co"
+    }
 
     def test_5_get_all_supplier(self):
         r = requests.get(TestAppiSupplier.supplier)
@@ -51,3 +59,9 @@ class TestAppiSupplier(unittest.TestCase):
     def test_6_delete_supplier(self):
         r = requests.delete(TestAppiSupplier.delete_supplier)
         self.assertEqual(r.status_code, 200)
+
+    def test_7_put_supplier(self):
+        r = requests.put(TestAppiSupplier.update_supplier, json=TestAppiSupplier.update_object)
+        self.assertEqual(r.status_code, 200)
+
+
