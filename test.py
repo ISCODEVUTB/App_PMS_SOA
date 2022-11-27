@@ -6,7 +6,7 @@ import requests
 
 def test_sq():
     n = 2
-    assert n*n == 40
+    assert n*n == 4
 
 
 class ApiTestStock(unittest.TestCase):
