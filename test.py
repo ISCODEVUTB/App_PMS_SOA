@@ -9,7 +9,6 @@ class ApiTestStock(unittest.TestCase):
     vehicles = "{}/vehicles".format(API_URL)
     vehicle = "{}/vehicle".format(API_URL)
     stock = "{}/stock".format(API_URL)
-    stock_delete = "{}/stock/4".format(API_URL)
     vehicle_object = {
             "name": "Onix Turbo RS 2023",
             "motor": "MOTOR TURBO 115 HP TORQUE 160 NM",
@@ -37,15 +36,13 @@ class ApiTestStock(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
 
     def test_4_delete_stock(self):
-        r = requests.delete(ApiTestStock.stock_delete)
+        r = requests.delete(ApiTestStock.stock + '/4')
         self.assertEqual(r.status_code, 200)
 
 
 class TestAppiSupplier(unittest.TestCase):
     API_URL = 'https://servicio-suplier.onrender.com'
     supplier = "{}/supplier".format(API_URL)
-    delete_supplier = "{}/supplier/4".format(API_URL)
-    update_supplier = "{}/supplier/4".format(API_URL)
     update_object = {
         "name": "Toyota",
         "nit": "9007805105",
@@ -59,11 +56,11 @@ class TestAppiSupplier(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
 
     def test_6_delete_supplier(self):
-        r = requests.delete(TestAppiSupplier.delete_supplier)
+        r = requests.delete(TestAppiSupplier.supplier + '/4')
         self.assertEqual(r.status_code, 200)
 
     def test_7_put_supplier(self):
-        r = requests.put(TestAppiSupplier.update_supplier, json=TestAppiSupplier.update_object)
+        r = requests.put(TestAppiSupplier.supplier + '/4', json=TestAppiSupplier.update_object)
         self.assertEqual(r.status_code, 200)
 
 
