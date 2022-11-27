@@ -65,3 +65,12 @@ class TestAppiSupplier(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
 
 
+class TestApiLogin(unittest.TestCase):
+    URL = 'https://login-norma.herokuapp.com/api/'
+    login = "{}/login?email=esneydergp69@gmail.com&password=123456".format(URL)
+
+    def test_8_post_create_token(self):
+        r = requests.post(TestApiLogin.login)
+        self.assertEqual(r.status_code, 200)
+
+
