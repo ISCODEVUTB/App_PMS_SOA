@@ -4,11 +4,6 @@ import urllib.parse
 import requests
 
 
-def test_sq():
-    n = 2
-    assert n*n == 4
-
-
 class ApiTestStock(unittest.TestCase):
     API_URL = "https://servicio-stock.onrender.com"
     vehicles = "{}/vehicles".format(API_URL)
