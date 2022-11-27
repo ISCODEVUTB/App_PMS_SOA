@@ -1,4 +1,6 @@
+import os
 import unittest
+import urllib.parse
 import requests
 
 
@@ -66,11 +68,17 @@ class TestAppiSupplier(unittest.TestCase):
 
 
 class TestApiLogin(unittest.TestCase):
-    URL = 'https://login-norma.herokuapp.com/api/'
-    login = "{}/login?email=esneydergp69@gmail.com&password=123456".format(URL)
+    URL = 'https://login-norma.herokuapp.com/api'
+    params = {
+        'email': f'{os.getenv("EMAIL", "esneydergp69@gmail.com")}',
+        'password': os.getenv("PASSWORD", "123456")
+    }
+    print(os.getenv("PASSWORD"))
+    print(params)
+    info = '{}/login?' + urllib.parse.urlencode(params)
+    login = info.format(URL)
 
     def test_8_post_create_token(self):
         r = requests.post(TestApiLogin.login)
         self.assertEqual(r.status_code, 200)
-
 
