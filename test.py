@@ -2,7 +2,6 @@ import os
 import unittest
 import urllib.parse
 import requests
-import json
 
 
 class ApiTestStock(unittest.TestCase):
