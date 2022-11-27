@@ -5,7 +5,7 @@ import requests
 
 
 class ApiTestStock(unittest.TestCase):
-    API_URL = "https://servicio-stock.onrender.com/"
+    API_URL = "https://servicio-stock.onrender.com"
     vehicles = "{}/vehicles".format(API_URL)
     vehicle = "{}/vehicle".format(API_URL)
     stock = "{}/stock".format(API_URL)
