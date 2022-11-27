@@ -3,6 +3,8 @@ import unittest
 import urllib.parse
 import requests
 
+def add(a, b):
+    return a + b
 
 class ApiTestStock(unittest.TestCase):
     API_URL = "https://servicio-stock.onrender.com"
@@ -77,3 +79,10 @@ class TestApiLogin(unittest.TestCase):
         r = requests.post(TestApiLogin.login)
         self.assertEqual(r.status_code, 200)
 
+    def test_add_strings(self):
+        """
+        Test the addition of two strings returns the two string as one
+        concatenated string
+        """
+        result = add('abc', 'def')
+        self.assertEqual(result, 'abcdef')
