@@ -73,8 +73,6 @@ class TestApiLogin(unittest.TestCase):
         'email': f'{os.getenv("EMAIL", "esneydergp69@gmail.com")}',
         'password': os.getenv("PASSWORD", "123456")
     }
-    print(os.getenv("PASSWORD"))
-    print(params)
     info = '{}/login?' + urllib.parse.urlencode(params)
     login = info.format(URL)
 
