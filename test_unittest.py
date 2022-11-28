@@ -89,6 +89,7 @@ class TestApiLogin(unittest.TestCase):
     }
     users = '{}/users'.format(URL)
     headers={'Authorization': 'Bearer {}'.format(token['token'])}
+    index = '{}/index?username=Esneider'.format(URL)
 
 
     def test_8_create_token(self):
@@ -106,6 +107,11 @@ class TestApiLogin(unittest.TestCase):
     def test_11_users(self):
         r = requests.get(TestApiLogin.users, headers=TestApiLogin.headers)
         self.assertAlmostEqual(r.status_code, 200)
+
+    def test_12_index(self):
+        r = requests.get(TestApiLogin.index, headers=TestApiLogin.headers)
+        self.assertAlmostEqual(r.status_code, 200)
+
     
 
 class TestApiUsers(unittest.TestCase):
@@ -125,14 +131,15 @@ class TestApiUsers(unittest.TestCase):
     info = '{}/user?' + urllib.parse.urlencode(params)
     user_update = info.format(URL)
 
-    def test_11_all_users(self):
+    def test_13_all_users(self):
         r = requests.get(TestApiUsers.users)
         self.assertAlmostEqual(r.status_code, 200)
     
-    def test_12_user(self):
+    def test_14_user(self):
         r = requests.get(TestApiUsers.user)
         self.assertAlmostEqual(r.status_code, 200)
 
-    def test_13_create_user(self):
+    def test_15_create_user(self):
         r = requests.post(TestApiUsers.user_update)
         self.assertAlmostEqual(r. status_code, 200)
+
