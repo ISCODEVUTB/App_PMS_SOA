@@ -82,12 +82,13 @@ class TestApiLogin(unittest.TestCase):
     "last_name": "Martinez",
     "user": "Kmapax", 
     "email": "guzmane@utb.edu.co", 
-    "password": "KevinLea" ,
+    "password": os.getenv("PASSWORD2", "KevinLea"),
     "rool": 3, 
     "address": "Manzana G lote 1", 
     "id": 2  
     }
     users = '{}/users'.format(URL)
+    headers={'Authorization': 'Bearer {}'.format(token['token'])}
 
 
     def test_8_create_token(self):
@@ -95,15 +96,15 @@ class TestApiLogin(unittest.TestCase):
         self.assertAlmostEqual(r.status_code, 200)
     
     def test_9_veriify_user(self):
-        r = requests.get(TestApiLogin.user,  headers={'Authorization': 'Bearer {}'.format(TestApiLogin.token['token'])})
+        r = requests.get(TestApiLogin.user, headers=TestApiLogin.headers )
         self.assertAlmostEqual(r.status_code, 200)
 
     def test_10_update_user(self):
-        r = requests.get(TestApiLogin.update, json=TestApiLogin.info_update, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.token['token'])})
+        r = requests.get(TestApiLogin.update, json=TestApiLogin.info_update, headers=TestApiLogin.headers)
         self.assertAlmostEqual(r.status_code, 200)
     
     def test_11_users(self):
-        r = requests.get(TestApiLogin.users, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.token['token'])})
+        r = requests.get(TestApiLogin.users, headers=TestApiLogin.headers)
         self.assertAlmostEqual(r.status_code, 200)
     
 
