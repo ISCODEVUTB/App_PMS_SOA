@@ -69,7 +69,7 @@ class Cart(object):
         self._sup_name = sup_name
 
     def __str__(self):
-        return '({0}. {1}, {2}, {3}, {4}, {5})'.format(self.id_product, self.name, self.sup_name, self.price, self.motor, self.security,
+        return '({0}, {1}, {2}, {3}, {4}, {5})'.format(self.id_product, self.name, self.sup_name, self.price, self.motor, self.security,
                                                   self.gearbox)
 
 
