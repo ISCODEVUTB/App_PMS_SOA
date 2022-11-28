@@ -44,7 +44,7 @@ def update_user(mysql):
         cursor.execute(sql)
         mysql.connection.commit()
         return jsonify({"Message": "User successfully updated"})
-    except Exception as error:
+    except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})
 
 

@@ -33,7 +33,7 @@ def user():
     try:
         data = controller.user(mysql)
         return data
-    except Exception as error:
+    except ValueError:
         return {"Message": "Error"}
 
 
@@ -42,7 +42,7 @@ def create_user():
     try:
         data = controller.create_user(mysql)
         return data
-    except Exception as error:
+    except ValueError:
         return {"Message": "User could not be created successfully"}
 
 @server.put('/update')
@@ -50,7 +50,7 @@ def update_user():
     try:
         update = controller.update_user(mysql)
         return update
-    except Exception as error:
+    except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})
 
 
