@@ -65,21 +65,47 @@ class TestAppiSupplier(unittest.TestCase):
 
 
 class TestApiLogin(unittest.TestCase):
-    URL = 'https://login-norma.herokuapp.com/api'
-    user = '{}/user'.format(URL)
+    URL = 'https://login-normal.onrender.com/api'
     params = {
-        'email': f'{os.getenv("EMAIL", "esneydergp69@gmail.com")}',
-        'password': os.getenv("PASSWORD", "123456")
+        "email": os.getenv("EMAIL", "esneydergp69@gmail.com"),
+        "password": os.getenv("PASSWORD", "123456")
     }
     info = '{}/login?' + urllib.parse.urlencode(params)
     login = info.format(URL)
-    Token = {
-        'token': os.getenv('TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkVzbmV pZGVyIEVucmlxdWUiLCJsYXN0X25hbWUiOiJHdXptYW4iLCJ1c2VyIjoiRXNuZWlkZXIyIiwiZW1haWwiOiJlc2 5leWRlcmdwNjlAZ21haWwuY29tIiwidHlwZSI6IlN1cGVyIEFkbWluaXN0cmFkb3IiLCJleHAiOjE2NjkyMTA4NDZ9.W3NAkyW5WGDDwhuJ6v1xLkvBcvSVAHn0aJ3QIG8YAm0')
+    token = {
+    "token": os.getenv("TOKEN", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkVzbmVpZGVyIEVucmlxdWUiLCJsYXN0X25hbWUiOiJHdXptYW4iLCJ1c2VyIjoiRXNuZWlkZXIyIiwiZW1haWwiOiJlc25leWRlcmdwNjlAZ21haWwuY29tIiwidHlwZSI6IlN1cGVyIEFkbWluaXN0cmFkb3IiLCJleHAiOjE2Njk4MjU4MDN9.LqgN7jlhV9Hf5JQ35buZozxBmkYG-35uRMe-9nrCEx0")
     }
-    index = '{}/index?Esneider'.format(URL)
+    user = '{}/user'.format(URL)
+    update = '{}/update'.format(URL)
+    info_update = {
+    "name": "Kevin", 
+    "last_name": "Martinez",
+    "user": "Kmapax", 
+    "email": "guzmane@utb.edu.co", 
+    "password": "KevinLea" ,
+    "rool": 3, 
+    "address": "Manzana G lote 1", 
+    "id": 2  
+    }
     users = '{}/users'.format(URL)
 
 
+    def test_8_create_token(self):
+        r = requests.post(TestApiLogin.login)
+        self.assertAlmostEqual(r.status_code, 200)
+    
+    def test_9_veriify_user(self):
+        r = requests.get(TestApiLogin.user,  headers={'Authorization': 'Bearer {}'.format(TestApiLogin.token['token'])})
+        self.assertAlmostEqual(r.status_code, 200)
+
+    def test_10_update_user(self):
+        r = requests.get(TestApiLogin.update, json=TestApiLogin.info_update, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.token['token'])})
+        self.assertAlmostEqual(r.status_code, 200)
+    
+    def test_11_users(self):
+        r = requests.get(TestApiLogin.users, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.token['token'])})
+        self.assertAlmostEqual(r.status_code, 200)
+    
 
 class TestApiUsers(unittest.TestCase):
     URL = 'https://users-gt8n.onrender.com'
