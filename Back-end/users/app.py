@@ -24,7 +24,7 @@ def all_users():
     try:
         data = controller.all_user(mysql)
         return data
-    except Exception as error:
+    except ValueError:
         return {"Message": "Error"}
 
 
