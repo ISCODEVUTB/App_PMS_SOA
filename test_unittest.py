@@ -117,7 +117,7 @@ class TestApiUsers(unittest.TestCase):
         "last_name": "Guzman P",
         "user": "Esneide2",
         "email": "esneydergp69@gmail.com",
-        "password": "12345",
+        "password": os.getenv("PASSWORD", "123456"),
         "rool": 2,
         "id": 2
     }
