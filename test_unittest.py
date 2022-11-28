@@ -74,31 +74,38 @@ class TestApiLogin(unittest.TestCase):
     info = '{}/login?' + urllib.parse.urlencode(params)
     login = info.format(URL)
     Token = {
-        'token': os.getenv('TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkVzbmV'
-                 'pZGVyIEVucmlxdWUiLCJsYXN0X25hbWUiOiJHdXptYW4iLCJ1c2VyIjoiRXNuZWlkZXIyIiwiZW1haWwiOiJlc2'
-                 '5leWRlcmdwNjlAZ21haWwuY29tIiwidHlwZSI6IlN1cGVyIEFkbWluaXN0cmFkb3IiLCJleHAiOjE2NjkyMTA4NDZ9.W3NAkyW5'
-                 'WGDDwhuJ6v1xLkvBcvSVAHn0aJ3QIG8YAm0')
+        'token': os.getenv('TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkVzbmV pZGVyIEVucmlxdWUiLCJsYXN0X25hbWUiOiJHdXptYW4iLCJ1c2VyIjoiRXNuZWlkZXIyIiwiZW1haWwiOiJlc2 5leWRlcmdwNjlAZ21haWwuY29tIiwidHlwZSI6IlN1cGVyIEFkbWluaXN0cmFkb3IiLCJleHAiOjE2NjkyMTA4NDZ9.W3NAkyW5WGDDwhuJ6v1xLkvBcvSVAHn0aJ3QIG8YAm0')
     }
     index = '{}/index?Esneider'.format(URL)
     users = '{}/users'.format(URL)
 
-    def test_8_post_create_token(self):
-        r = requests.post(TestApiLogin.login)
-        self.assertEqual(r.status_code, 200)
 
-    def test_9_verify_token(self):
-        r = requests.get(TestApiLogin.user, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.Token)})
-        self.assertEqual(r.status_code, 200)
 
-    def test_10_verify_index(self):
-        r = requests.get(TestApiLogin.index, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.Token)})
-        self.assertEqual(r.status_code, 200)
+class TestApiUsers(unittest.TestCase):
+    URL = 'https://users-gt8n.onrender.com'
+    users = '{}/users'.format(URL)
+    user = '{}/user?username=Esneider2&email=esneydergp69@gmail.com'.format(URL)
+    params = {
+        "name": "Esneider E",
+        "last_name": "Guzman P",
+        "user": "Esneide2",
+        "email": "esneydergp69@gmail.com",
+        "password": "12345",
+        "rool": 2,
+        "id": 2
+    }
+    
+    info = '{}/user?' + urllib.parse.urlencode(params)
+    user_update = info.format(URL)
 
     def test_11_all_users(self):
-        r = requests.get(TestApiLogin.users, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.Token)})
+        r = requests.get(TestApiUsers.users)
         self.assertAlmostEqual(r.status_code, 200)
     
+    def test_12_user(self):
+        r = requests.get(TestApiUsers.user)
+        self.assertAlmostEqual(r.status_code, 200)
 
-        
-
-
+    def test_13_create_user(self):
+        r = requests.post(TestApiUsers.user_update)
+        self.assertAlmostEqual(r. status_code, 200)
