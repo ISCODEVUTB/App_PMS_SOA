@@ -1,24 +1,24 @@
 class Cart(object):
 
-    def __init__(self, idProduct: int, name: str = "Name", supName: str = "Name", price: int = 0, motor: str = "Name", security: str = "Name",
+    def __init__(self, id_product: int, name: str = "Name", sup_name: str = "Name", price: int = 0, motor: str = "Name", security: str = "Name",
                  gearbox: str = "Name"):
         """Cart builder object"""
 
-        self._idProduct = idProduct
+        self._id_product = id_product
         self._name = name
         self._price = price
         self._motor = motor
         self._security = security
         self._gearbox = gearbox
-        self._supName = supName
+        self._sup_name = sup_name
 
     @property
-    def idProduct(self) -> int:
-        return self._idProduct
+    def id_product(self) -> int:
+        return self._id_product
 
-    @idProduct.setter
-    def idProduct(self, idProduct: int):
-        self._idProduct = idProduct
+    @id_product.setter
+    def id_product(self, id_product: int):
+        self._id_product = id_product
 
     @property
     def name(self) -> str:
@@ -61,18 +61,18 @@ class Cart(object):
         self._gearbox = gearbox
 
     @property
-    def supName(self) -> str:
-        return self._supName
+    def sup_name(self) -> str:
+        return self._sup_name
 
-    @supName.setter
-    def supName(self, supName: str):
-        self._supName = supName
+    @sup_name.setter
+    def sup_name(self, sup_name: str):
+        self._sup_name = sup_name
 
     def __str__(self):
-        return '({0}. {1}, {2}, {3}, {4}, {5})'.format(self.idProduct, self.name, self.supName, self.price, self.motor, self.security,
+        return '({0}. {1}, {2}, {3}, {4}, {5})'.format(self.id_product, self.name, self.sup_name, self.price, self.motor, self.security,
                                                   self.gearbox)
 
 
 if __name__ == '__main__':
-    carro = Cart(idProduct=1, name="AUDI R8", price=1049200218)
+    carro = Cart(id_product=1, name="AUDI R8", price=1049200218)
     print(carro)
