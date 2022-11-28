@@ -11,11 +11,11 @@ csrf = CSRFProtect()
 csrf.init_app(server)
 
 # The connection point to the base is created.
-server.config['MYSQL_HOST'] = getenv('HOST')
-server.config['MYSQL_USER'] = getenv('USER')
-server.config['MYSQL_PASSWORD'] = getenv('PASSWORD')
-server.config['MYSQL_DB'] = getenv('BD')
-server.config['WTF_CSRF_ENABLED'] = getenv('PROTECT')
+server.config['MYSQL_HOST'] = os.getenv('HOST')
+server.config['MYSQL_USER'] = os.getenv('USER')
+server.config['MYSQL_PASSWORD'] = os.getenv('PASSWORD')
+server.config['MYSQL_DB'] = os.getenv('BD')
+server.config['WTF_CSRF_ENABLED'] = os.getenv('PROTECT')
 mysql = MySQL(server)
 
 
