@@ -66,13 +66,31 @@ class TestAppiSupplier(unittest.TestCase):
 
 class TestApiLogin(unittest.TestCase):
     URL = 'https://login-norma.herokuapp.com/api'
+    user = '{}/user'.format(URL)
     params = {
         'email': f'{os.getenv("EMAIL", "esneydergp69@gmail.com")}',
         'password': os.getenv("PASSWORD", "123456")
     }
     info = '{}/login?' + urllib.parse.urlencode(params)
     login = info.format(URL)
+    Token = {
+        'token': os.getenv('TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkVzbmV'
+                 'pZGVyIEVucmlxdWUiLCJsYXN0X25hbWUiOiJHdXptYW4iLCJ1c2VyIjoiRXNuZWlkZXIyIiwiZW1haWwiOiJlc2'
+                 '5leWRlcmdwNjlAZ21haWwuY29tIiwidHlwZSI6IlN1cGVyIEFkbWluaXN0cmFkb3IiLCJleHAiOjE2NjkyMTA4NDZ9.W3NAkyW5'
+                 'WGDDwhuJ6v1xLkvBcvSVAHn0aJ3QIG8YAm0')
+    }
+    index = '{}/index?Esneider'.format(URL)
 
     def test_8_post_create_token(self):
         r = requests.post(TestApiLogin.login)
         self.assertEqual(r.status_code, 200)
+
+    def test_9_verify_token(self):
+        r = requests.get(TestApiLogin.user, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.Token)})
+        self.assertEqual(r.status_code, 200)
+
+    def test_9_verify_index(self):
+        r = requests.get(TestApiLogin.user, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.Token)})
+        self.assertEqual(r.status_code, 200)
+
+
