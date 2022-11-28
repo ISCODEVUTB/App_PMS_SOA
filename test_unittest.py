@@ -90,7 +90,7 @@ class TestApiLogin(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
 
     def test_10_verify_index(self):
-        r = requests.get(TestApiLogin.user, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.Token)})
+        r = requests.get(TestApiLogin.index, headers={'Authorization': 'Bearer {}'.format(TestApiLogin.Token)})
         self.assertEqual(r.status_code, 200)
 
 
