@@ -1,11 +1,11 @@
-from unittest import TestCase
+import unittest
 import users
 import supplier
 import stock
 from os import getenv
 
 
-class TestUsers(TestCase):
+class Test(unittest.TestCase):
     update = {
         "name": "Esneider",
         "last_name": "Guzman",
@@ -42,9 +42,6 @@ class TestUsers(TestCase):
     def test_create_user(self):
         r = users.create_user(self.create)
         self.assertEqual(len(r.json()), 2)
-
-
-class TestStock(TestCase):
 
     create_vehicle = {
         'id': 7,
@@ -85,8 +82,6 @@ class TestStock(TestCase):
         self.assertEqual(len(r.json()), 2)
 
 
-class TestSupplier(TestCase):
-
     update = {
         'name': 'Toyota',
         'nit': 269549878654549856 ,
@@ -110,3 +105,6 @@ class TestSupplier(TestCase):
         r = supplier.update_supplier(self.update)
         self.assertEqual(len(r.json()), 2)
 
+
+if __name__ == '__main__':
+    unittest.main()
