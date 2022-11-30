@@ -13,4 +13,4 @@ class TestSuma(TestCase):
         self.assertEqual(suma(1, 2), 3)
     
     def test_all_users(self):
-        self.assertEqual(all_users(), 200)
+        self.assertEqual(all_users(conection), 200)
