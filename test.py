@@ -36,11 +36,11 @@ class Test(unittest.TestCase):
         self.assertEqual(len(r.json()), 2)
 
     def test_update_user(self):
-        r = users.update_user(self.update)
+        r = users.update_user()
         self.assertEqual(len(r.json()), 2)
 
     def test_create_user(self):
-        r = users.create_user(self.create)
+        r = users.create_user()
         self.assertEqual(len(r.json()), 2)
 
     create_vehicle = {
