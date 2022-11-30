@@ -16,7 +16,7 @@ def all_user(mysql):
 def user(mysql, id):
     cursor = mysql.connection.cursor()
     sql = "select u.name, u.last_name, u.user, u.email, r.name from users u inner join rool r on (u.rool = r.idrool)" \
-          "where u.user = '{0}' or u.email = '{1}'".format(id)
+          "where u.user = '{0}'".format(id)
     cursor.execute(sql)
     data = cursor.fetchone()
     user_info = []
