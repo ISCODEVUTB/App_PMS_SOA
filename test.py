@@ -36,11 +36,11 @@ class TestUsers(TestCase):
         self.assertEqual(len(r.json()), 2)
 
     def test_update_user(self):
-        r = users.update_user(json=self.update)
+        r = users.update_user(self.update)
         self.assertEqual(len(r.json()), 2)
 
     def test_create_user(self):
-        r = users.create_user(json=self.create)
+        r = users.create_user(self.create)
         self.assertEqual(len(r.json()), 2)
 
     def test_all_users_controller(self):
