@@ -46,7 +46,7 @@ def create_user(crete: dict):
 
 def update_user(update : dict):
     try:
-        update = user_controller.update_user(mysql)
+        update = user_controller.update_user(mysql, update)
         return update
     except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})
