@@ -1,5 +1,6 @@
 from unittest import TestCase
 import users
+import stock
 from os import getenv
 
 
@@ -44,4 +45,10 @@ class TestUsers(TestCase):
 
     def test_create_user(self):
         r = users.create_user(json=self.create)
+        self.assertEqual(len(r.json()), 2)
+
+
+class TestStock(TestCase):
+    def test_all_stock(self):
+        r = stock.all_stock()
         self.assertEqual(len(r.json()), 2)
