@@ -36,7 +36,7 @@ def user():
         return {"Message": "Error"}
 
 
-def create_user():
+def create_user0(crete: dict):
     try:
         data = user_controller.create_user(mysql)
         return data
@@ -44,7 +44,7 @@ def create_user():
         return {"Message": "User could not be created successfully"}
 
 
-def update_user():
+def update_user(update: dict):
     try:
         update = user_controller.update_user(mysql)
         return update
