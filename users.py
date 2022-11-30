@@ -48,7 +48,7 @@ def create_user():
 @server.put('/update')
 def update_user():
     try:
-        update = user_controller.update_user(mysql)
+        update = user_controller.update_user(mysql, 1)
         return update
     except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})

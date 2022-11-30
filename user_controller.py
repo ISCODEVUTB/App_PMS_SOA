@@ -1,4 +1,5 @@
 from flask import jsonify, request
+import json
 
 
 def all_user(mysql):
@@ -28,17 +29,15 @@ def user(mysql, id):
         return jsonify(user_info)
 
 
-def update_user(mysql):
+def update_user(mysql, id):
     try:
         cursor = mysql.connection.cursor()
         sql = "update users set name = '{0}', last_name = '{1}', user = '{2}', email = '{3}', password = '{4}'," \
-              "rool = '{5}', address = '{6}' where id = '{7}'".format(request.args.get('name'),
-                                                                      request.args.get('last_name'),
-                                                                      request.args.get('user'),
-                                                                      request.args.get('email'),
-                                                                      request.args.get('password'),
-                                                                      request.args.get('rool'),
-                                                                      request.args.get('address'), request.args.get('id'))
+              "rool = '{5}', address = '{6}' where id = '{7}'".format(request.json['name'], request.json['last_name'],
+                                                                      request.json['user'], request.json['email'],
+                                                                      request.json['password'],
+                                                                      request.json['rool'],
+                                                                      request.json['address'], request.json['id'])
         cursor.execute(sql)
         mysql.connection.commit()
         return jsonify({"Message": "User successfully updated"})
@@ -47,16 +46,16 @@ def update_user(mysql):
 
 
 def create_user(mysql):
-    name = request.args.get('name')
-    last_name = request.args.get('last_name')
-    user = request.args.get('user')
-    email = request.args.get('email')
-    password = request.args.get('password')
-    rool = request.args.get('rool')
-    address = request.args('address')
+    name = request.json['name']
+    last_name = request.json['last_name']
+    user = request.json['user']
+    email = request.json['email']
+    password = request.json['password']
+    rool = request.json['rool']
+    address = request.args['address']
     cursor = mysql.connection.cursor()
     sql = "insert into users (name, last_name, user, email, password, rool, address) " \
-          "values ('{0}', '{1}', '{2}', '{3}','{4}','{5}', '{6}')".format(name, last_name, user, email, password,
+          "values {0}', '{1}', '{2}', '{3}','{4}','{5}', '{6}')".format(name, last_name, user, email, password,
                                                                           rool, address)
     cursor.execute(sql)
     mysql.connection.commit()
