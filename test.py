@@ -2,7 +2,6 @@ from unittest import TestCase
 import users
 import supplier
 import stock
-import logic.cart
 import shop_car
 from os import getenv
 
