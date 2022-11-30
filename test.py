@@ -10,4 +10,4 @@ class Test(TestCase):
 class TestUsers(TestCase):
     def test(self):
         r = users.all_users_1()
-        self.assertEqual(r, 200)
+        self.assertEqual(len(r.json()), 2)

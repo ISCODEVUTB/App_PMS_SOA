@@ -13,12 +13,10 @@ def all_user(mysql):
     return jsonify({"users": users})
 
 
-def user(mysql):
-    user_name = request.args.get('user_name')
-    email = request.args.get('email')
+def user(mysql, id):
     cursor = mysql.connection.cursor()
     sql = "select u.name, u.last_name, u.user, u.email, r.name from users u inner join rool r on (u.rool = r.idrool)" \
-          "where u.user = '{0}' or u.email = '{1}'".format(user_name, email)
+          "where u.user = '{0}' or u.email = '{1}'".format(id)
     cursor.execute(sql)
     data = cursor.fetchone()
     user_info = []
