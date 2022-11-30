@@ -1,7 +1,9 @@
 import unittest
-import app
+from app import *
 
-class Test(unittest.TestCase):
+
+
+class TestConectionBase(unittest.TestCase):
     def test(self):
-        r = app.suma(1, 2)
-        self.assertEqual(r, 3)
+        r = conection()
+        self.assertEqual(r, 200)
