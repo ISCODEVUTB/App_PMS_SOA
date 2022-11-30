@@ -1,7 +1,12 @@
 from unittest import TestCase
 import users
+import app
 from os import getenv
 
+
+class TestSuma(TestCase):
+    def test_suma(self):
+        self.assertEqual(app.suma(2,2), 4)
 
 class TestUsers(TestCase):
     update = {
