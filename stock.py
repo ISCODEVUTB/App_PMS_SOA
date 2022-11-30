@@ -2,7 +2,6 @@
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 import stock_controller
-from dotenv import load_dotenv
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 
