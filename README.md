@@ -3,6 +3,8 @@ App_PMS_SOA
 
 https://github.com/ISCODEVUTB/App_PMS_SOA/blob/main/Imagen1.png 
 
+![vida](https://raw.githubusercontent.com/ISCODEVUTB/App_PMS_SOA/main/logo_motorshop.jpg)
+
 Autores: Esneider Guzman, Kevin Martinez, Diego Quintana
 
 <h1>Resumen<h1>
