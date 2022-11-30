@@ -38,7 +38,8 @@ def create_vehicle(mysql):
     cursor = mysql.connection.cursor()
     sql = """insert into vehicle(name, motor, gearbox, security, type) values ('{0}', '{1}', '{2}',
             '{3}', '{4}') """.format(request.json['name'], request.json['motor'], request.json['gearbox'],
-                                     request.json['security'], request.json['type'])
+                                     request.json['security'], request.json['type'], request.json['url'], request.json['description'],
+                                     request.json['data_sheet'], request.json['id'])
     cursor.execute(sql)
     mysql.connection.commit()
     return jsonify({'message': 'Vehicle created'})
