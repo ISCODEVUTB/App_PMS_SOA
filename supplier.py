@@ -2,7 +2,6 @@
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 import supplier_contraller
-from dotenv import load_dotenv
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 
@@ -51,5 +50,4 @@ def supplier_update(id):
 
 # the application is executed
 if __name__ == '__main__':
-    load_dotenv()
     server.run(debug=True)
