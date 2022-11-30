@@ -1,11 +1,10 @@
 # we invoke the necessary libraries
 from flask import Flask, render_template,jsonify, request
-
 from dotenv import load_dotenv
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 from flask_mysqldb import MySQL
-import supplier_contraller
+import shopcar_contraller
 
 
 # The access point is created
@@ -26,7 +25,7 @@ mysql = MySQL(server)
 @server.get('/')
 def index():
     try:
-        return supplier_contraller.clear()
+        return shopcar_contraller.clear()
     except Exception as error:
         return page_not_found(error)
 
@@ -34,7 +33,7 @@ def index():
 @server.route('/show')
 def show():
     try:
-        return supplier_contraller.show_car()
+        return shopcar_contraller.show_car()
     except Exception as ex:
         return page_not_found(ex)
 
@@ -42,7 +41,7 @@ def show():
 @server.route('/shotcar')
 def car():
     try:
-        return supplier_contraller.show_list()
+        return shopcar_contraller.show_list()
     except Exception as ex:
         return page_not_found(ex)
 
@@ -50,7 +49,7 @@ def car():
 @server.get('/shotcar/<id>')
 def car_product(id):
     try:
-        return supplier_contraller.into_shopcar(mysql, id)
+        return shopcar_contraller.into_shopcar(mysql, id)
     except Exception as ex:
         return page_not_found(ex)
 

@@ -3,6 +3,7 @@ import users
 import supplier
 import stock
 from os import getenv
+import shop_car
 
 
 class TestUsers(TestCase):
@@ -41,22 +42,6 @@ class TestUsers(TestCase):
 
     def test_create_user(self):
         r = users.create_user(self.create)
-        self.assertEqual(len(r.json()), 2)
-
-    def test_all_users_controller(self):
-        r = user_controller.all_user(users.mysql)
-        self.assertAlmostEqual(len(r.json()), 2)
-
-    def test_get_user_controller(self):
-        r = user_controller.user(users.mysql, 1)
-        self.assertEqual(len(r.json()), 2)
-
-    def test_update_user_controller(self):
-        r = user_controller.update_user(users.mysql, self.update)
-        self.assertEqual(len(r.json()), 2)
-
-    def test_create_user_controller(self):
-        r = user_controller.create_user(users.mysql, self.create)
         self.assertEqual(len(r.json()), 2)
 
 
@@ -126,4 +111,26 @@ class TestSupplier(TestCase):
         r = stock.update_supplier(self.update)
         self.assertEqual(len(r.json()), 2)
 
+    def test_delete_supplier(self):
+        r = stock.delete_supplier(1)
+        self.assertEqual(len(r.json()), 2)
+
+
+class TestShopCar(TestCase):
+
+    def test_index_shop_car(self):
+        r = shop_car.index()
+        self.assertEqual(len(r.json()), 2)
+    
+    def test_show_shop_car(self):
+        r = shop_car.show()
+        self.assertEqual(len(r.json()), 2)
+
+    def test_car(self):
+        r = shop_car.car()
+        self.assertEqual(len(r.json()), 2)
+
+    def test_add_car(self):
+        r = shop_car.add_car(4)
+        self.assertEqual(len(r.json()), 2)
     
