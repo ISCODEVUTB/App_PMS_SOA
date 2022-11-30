@@ -11,3 +11,6 @@ cursor= conection.cursor()
 class TestSuma(TestCase):
     def test_suma(self):
         self.assertEqual(suma(1, 2), 3)
+    
+    def test_all_users(self):
+        self.assertEqual(all_users(), 200)
