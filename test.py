@@ -3,7 +3,7 @@ import users
 import supplier
 import stock
 from os import getenv
-import shop_car
+from shop_car
 
 
 class TestUsers(TestCase):
@@ -118,19 +118,42 @@ class TestSupplier(TestCase):
 
 class TestShopCar(TestCase):
 
-    def test_index_shop_car(self):
-        r = shop_car.index()
-        self.assertEqual(len(r.json()), 2)
-    
-    def test_show_shop_car(self):
-        r = shop_car.show()
+    def test_all_shop_car(self):
+        r = shop_car.all_shop_car()
         self.assertEqual(len(r.json()), 2)
 
-    def test_car(self):
-        r = shop_car.car()
+    def test_get_shop_car(self):
+        r = shop_car.get_shop_car(1)
         self.assertEqual(len(r.json()), 2)
 
-    def test_add_car(self):
-        r = shop_car.add_car(4)
+    def test_create_shop_car(self):
+        r = shop_car.create_shop_car(1, 1)
         self.assertEqual(len(r.json()), 2)
-    
+
+    def test_delete_shop_car(self):
+        r = shop_car.delete_shop_car(1)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_update_shop_car(self):
+        r = shop_car.update_shop_car(1, 1)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_all_shop_car_controller(self):
+        r = shop_car_controller.all_shop_car(shop_car.mysql)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_get_shop_car_controller(self):
+        r = shop_car_controller.get_shop_car(shop_car.mysql, 1)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_create_shop_car_controller(self):
+        r = shop_car_controller.create_shop_car(shop_car.mysql, 1, 1)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_delete_shop_car_controller(self):
+        r = shop_car_controller.delete_shop_car(shop_car.mysql, 1)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_update_shop_car_controller(self):
+        r = shop_car_controller.update_shop_car(shop_car.mysql, 1, 1)
+        self.assertEqual(len(r.json()), 2)
