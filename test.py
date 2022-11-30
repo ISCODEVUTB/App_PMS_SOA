@@ -1,6 +1,6 @@
 from unittest import TestCase
 import users
-import user_controller
+import supplier
 import stock
 from os import getenv
 
