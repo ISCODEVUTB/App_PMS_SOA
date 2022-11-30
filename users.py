@@ -50,3 +50,7 @@ def update_user():
         return update
     except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})
+
+
+if __name__ == '__main__':
+    server.run(debug=True)

@@ -48,3 +48,6 @@ def update_supplier(mysql, id_supplier):
         return show_supplier(mysql)
     except Exception as ex:
         return jsonify({'message': ex})
+
+if __name__ == '__main__':
+    server.run(debug=True)

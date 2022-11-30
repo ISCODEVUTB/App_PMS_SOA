@@ -1,7 +1,7 @@
 # we invoke the necessary libraries
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
-import contraller
+import supplier_contraller
 from dotenv import load_dotenv
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
@@ -26,7 +26,7 @@ mysql = MySQL(server)
 @server.get('/supplier')
 def index():
     try:
-        return contraller.show_supplier(mysql)
+        return supplier_contraller.show_supplier(mysql)
     except Exception as error:
         return jsonify({"Message": error})
 
@@ -35,7 +35,7 @@ def index():
 @server.delete('/supplier/<id>')
 def supplier_delete(id):
     try:
-        return contraller.delete_supplier(mysql, id)
+        return supplier_contraller.delete_supplier(mysql, id)
     except Exception as ex:
         return jsonify({"Message": ex})
 
@@ -44,7 +44,7 @@ def supplier_delete(id):
 @server.put('/supplier/<id>')
 def supplier_update(id):
     try:
-        return contraller.update_supplier(mysql, id)
+        return supplier_contraller.update_supplier(mysql, id)
     except Exception as ex:
         return jsonify({"message": ex})
 

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 from flask_mysqldb import MySQL
-import contraller
+import supplier_contraller
 
 
 # The access point is created
@@ -26,7 +26,7 @@ mysql = MySQL(server)
 @server.get('/')
 def index():
     try:
-        return contraller.clear()
+        return supplier_contraller.clear()
     except Exception as error:
         return page_not_found(error)
 
@@ -34,7 +34,7 @@ def index():
 @server.route('/show')
 def show():
     try:
-        return contraller.show_car()
+        return supplier_contraller.show_car()
     except Exception as ex:
         return page_not_found(ex)
 
@@ -42,7 +42,7 @@ def show():
 @server.route('/shotcar')
 def car():
     try:
-        return contraller.show_list()
+        return supplier_contraller.show_list()
     except Exception as ex:
         return page_not_found(ex)
 
@@ -50,7 +50,7 @@ def car():
 @server.get('/shotcar/<id>')
 def car_product(id):
     try:
-        return contraller.into_shopcar(mysql, id)
+        return supplier_contraller.into_shopcar(mysql, id)
     except Exception as ex:
         return page_not_found(ex)
 
