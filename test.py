@@ -1,5 +1,6 @@
 from unittest import TestCase
 import users
+import user_controller
 import stock
 from os import getenv
 
@@ -46,6 +47,15 @@ class TestUsers(TestCase):
     def test_create_user(self):
         r = users.create_user(json=self.create)
         self.assertEqual(len(r.json()), 2)
+    
+    def test_all_users_controller(self):
+        r = user_controller.all_user(users.mysql)
+        self.assertAlmostEqual(len(r.json()), 2)
+
+    def test_get_user_controller(self):
+        r = user_controller.user(users.mysql, 1)
+        self.assertEqual(len(r.json()), 2)
+    
 
 
 class TestStock(TestCase):
