@@ -5,7 +5,8 @@ from os import getenv
 
 class TestSuma(TestCase):
     def test_suma(self):
-        self.assertEqual(app.suma(2,2), 4)
+        self.assertEqual(app.suma(2, 2), 4)
+
 
 class TestUsers(TestCase):
     update = {
@@ -18,6 +19,17 @@ class TestUsers(TestCase):
         "address": "Calle 12 # 12 - 12",
         "id": "1"
     }
+    create = {
+        "name": "Diego Andres",
+        "last_name": "Quintana",
+        "user": "Qdiego25",
+        "email": "dquintana@utb.edu.co",
+        "password": getenv("PASSWORD", "1234567"),
+        "rool": "1",
+        "address": "Calle 12 # 12 - 12",
+        "id": "4"
+    }
+
     def test_all_users(self):
         r = users.all_users_1()
         self.assertEqual(len(r.json()), 2)
@@ -28,4 +40,8 @@ class TestUsers(TestCase):
 
     def test_update_user(self):
         r = users.update_user(json=self.update)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_create_user(self):
+        r = users.create_user(json=self.create)
         self.assertEqual(len(r.json()), 2)
