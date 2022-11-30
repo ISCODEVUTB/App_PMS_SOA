@@ -1,6 +1,5 @@
 # we invoke the necessary libraries
 from flask import Flask, render_template,jsonify, request
-from dotenv import load_dotenv
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 from flask_mysqldb import MySQL
