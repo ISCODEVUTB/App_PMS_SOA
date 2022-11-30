@@ -29,7 +29,7 @@ def user(mysql, id):
         return jsonify(user_info)
 
 
-def update_user(mysql, id):
+def update_user(mysql):
     try:
         cursor = mysql.connection.cursor()
         sql = "update users set name = '{0}', last_name = '{1}', user = '{2}', email = '{3}', password = '{4}'," \
