@@ -62,9 +62,3 @@ def delete_stock(id):
         return stock_controller.delete_stock(mysql, id)
     except Exception as ex:
         return jsonify({'message': ex})
-
-
-# the application is executed
-if __name__ == '__main__':
-    load_dotenv()
-    server.run(debug=True)

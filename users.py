@@ -1,5 +1,5 @@
 # we invoke the necessary libraries
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 import user_controller
 from flask_wtf.csrf import CSRFProtect
@@ -19,7 +19,7 @@ server.config['WTF_CSRF_ENABLED'] = os.getenv('PROTECT')
 mysql = MySQL(server)
 
 
-@server.get("/users")
+
 def all_users_1():
     try:
         data = user_controller.all_user(mysql)
@@ -28,7 +28,6 @@ def all_users_1():
         return {"Message": "Error"}
 
 
-@server.get("/user")
 def user():
     try:
         data = user_controller.user(mysql, 1)
@@ -37,7 +36,6 @@ def user():
         return {"Message": "Error"}
 
 
-@server.post('/user')
 def create_user():
     try:
         data = user_controller.create_user(mysql)
@@ -45,15 +43,10 @@ def create_user():
     except ValueError:
         return {"Message": "User could not be created successfully"}
 
-@server.put('/update')
+
 def update_user():
     try:
         update = user_controller.update_user(mysql)
         return update
     except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})
-
-
-# the application is executed
-if __name__ == '__main__':
-    server.run(debug=True, port=6000)

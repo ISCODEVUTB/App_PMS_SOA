@@ -95,11 +95,16 @@ class TestStock(TestCase):
         self.assertEqual(len(r.json()), 2)
     
     def test_create_vehicle(self):
-        r = stock.create_vehicle(json=self.create_vehicle)
+        r = stock.create_vehicle(self.create_vehicle)
         self.assertEqual(len(r.json()), 2)
 
     def test_create_stock(self):
-        r = stock.create_stock(json=self.create_stock)
+        r = stock.create_stock(self.create_stock)
+        self.assertEqual(len(r.json()), 2)
+
+    
+    def test_delete_stock(self):
+        r = stock.delete_stock(1)
         self.assertEqual(len(r.json()), 2)
 
     
