@@ -49,6 +49,23 @@ class TestUsers(TestCase):
 
 
 class TestStock(TestCase):
+
+    create = {
+        'name': 154,
+        'supplier': 1,
+        'sell_price': 50000000,
+        'quantity': 2,
+    }
+
+
     def test_all_stock(self):
         r = stock.all_stock()
+        self.assertEqual(len(r.json()), 2)
+    
+    def test_get_vehicle(self):
+        r = stock.vehicle(44)
+        self.assertEqual(len(r.json()), 2)
+
+    def test_create_vehicle(self):
+        r = stock.create_vehicle(json=self.create)
         self.assertEqual(len(r.json()), 2)
