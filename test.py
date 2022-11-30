@@ -2,7 +2,6 @@ from unittest import TestCase
 import users
 import supplier
 import stock
-import shop_car
 from os import getenv
 
 
@@ -98,41 +97,16 @@ class TestSupplier(TestCase):
     }
     
     def test_all_supplier(self):
-        r = stock.all_supplier()
+        r = supplier.index()
         self.assertEqual(len(r.json()), 2)
 
 
     def test_delete_supplier(self):
-        r = stock.delete_supplier(1)
+        r = supplier.delete_supplier(1)
         self.assertEqual(len(r.json()), 2)
 
 
     def test_update_supplier(self):
-        r = stock.update_supplier(self.update)
+        r = supplier.update_supplier(self.update)
         self.assertEqual(len(r.json()), 2)
 
-    def test_delete_supplier(self):
-        r = stock.delete_supplier(1)
-        self.assertEqual(len(r.json()), 2)
-
-
-class TestApiShopCar(TestCase):
-    def delete_car(self):
-        r = shop_car.index()
-        self.assertEqual(len(r.json()), 2)
-    
-    def show_get_all_shop_car(self):
-        r = shop_car.show()
-        self.assertEqual(len(r.json()), 2)
-    
-    def show_car_list(self):
-        r = shop_car.car()
-        self.assertEqual(len(r.json()), 2)
-    
-    def shop_add_car(self):
-        r = shop_car.car_product(44)
-        self.assertEqual(len(r.json()), 2)
-    
-
-class TestLogicCart(TestCase):
-    print("Hola")
