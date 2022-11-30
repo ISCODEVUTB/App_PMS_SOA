@@ -134,4 +134,6 @@ class TestApiShopCar(TestCase):
         r = shop_car.car_product(44)
         self.assertEqual(len(r.json()), 2)
     
-    
+
+class TestLogicCart(TestCase):
+    print("Hola")
