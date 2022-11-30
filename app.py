@@ -1,4 +1,3 @@
-import pymysql
 from os import getenv
 import mysql.connector
 
