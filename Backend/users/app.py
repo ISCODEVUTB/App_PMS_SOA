@@ -1,7 +1,7 @@
 # we invoke the necessary libraries
 from flask import Flask, render_template, jsonify, request
 from flask_mysqldb import MySQL
-from controller import *
+import controller
 from flask_wtf.csrf import CSRFProtect
 import os
 
@@ -22,7 +22,7 @@ mysql = MySQL(server)
 @server.get("/users")
 def all_users_1():
     try:
-        data = all_user(mysql)
+        data = controller.all_user(mysql)
         return data
     except ValueError:
         return {"Message": "Error"}
@@ -31,7 +31,7 @@ def all_users_1():
 @server.get("/user")
 def user():
     try:
-        data = user(mysql)
+        data = controller.user(mysql)
         return data
     except ValueError:
         return {"Message": "Error"}
@@ -40,7 +40,7 @@ def user():
 @server.post('/user')
 def create_user():
     try:
-        data = create_user(mysql)
+        data = controller.create_user(mysql)
         return data
     except ValueError:
         return {"Message": "User could not be created successfully"}
@@ -48,7 +48,7 @@ def create_user():
 @server.put('/update')
 def update_user():
     try:
-        update = update_user(mysql)
+        update = controller.update_user(mysql)
         return update
     except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})
