@@ -1,6 +1,5 @@
 from unittest import TestCase
 import users
-import app
 from os import getenv
 
 
