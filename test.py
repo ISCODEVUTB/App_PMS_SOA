@@ -123,5 +123,7 @@ class TestSupplier(TestCase):
 
 
     def test_update_supplier(self):
-        r = stock.update_supplier(stock.mysql, self.update)
+        r = stock.update_supplier(self.update)
         self.assertEqual(len(r.json()), 2)
+
+    
