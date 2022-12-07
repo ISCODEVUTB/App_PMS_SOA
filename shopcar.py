@@ -3,9 +3,12 @@ from flask import Flask, render_template,jsonify, request
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 from os import getenv
+from flask_wtf.csrf import CSRFProtect
 import shopcar_controller
 
 server = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(server)
 
 CORS(server)
 

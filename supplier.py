@@ -3,12 +3,15 @@ from flask import Flask, render_template, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 from os import getenv
+from flask_wtf.csrf import CSRFProtect
 import supplier_contraller
 
 # The access point is created
 server = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(server)
 
-CORS(server)
+
 
 # The connection point to the base is created
 server.config['MYSQL_HOST'] = getenv('HOST')
