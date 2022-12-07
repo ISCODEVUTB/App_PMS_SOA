@@ -21,35 +21,36 @@ mysql = MySQL(server)
 @server.get("/users")
 def all_users():
     try:
-        data = controller.all_user(mysql)
+        data = users_controller.all_user(mysql)
         return data
-    except Exception as error:
+    except ValueError:
         return {"Message": "Error"}
 
 
 @server.get("/user")
 def user():
     try:
-        data = controller.user(mysql)
+        data = users_controller.user(mysql)
         return data
-    except Exception as error:
+    except ValueError:
         return {"Message": "Error"}
 
 
 @server.post('/user')
 def create_user():
     try:
-        data = controller.create_user(mysql)
+        data = users_controller.create_user(mysql)
         return data
-    except Exception as error:
+    except ValueError:
         return jsonify({"Message": "User could not be created successfully"})
+
 
 @server.put('/update')
 def update_user():
     try:
-        update = controller.update_user(mysql)
+        update = users_controller.update_user(mysql)
         return update
-    except Exception as error:
+    except ValueError:
         return jsonify({"Message": "It was not possible to update the user's data"})
 
 
