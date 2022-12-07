@@ -1,15 +1,15 @@
 # we invoke the necessary libraries
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 import supplier_contraller
 
+
 # The access point is created
 server = Flask(__name__)
 csrf = CSRFProtect()
 csrf.init_app(server)
-
 
 
 # The connection point to the base is created
@@ -24,7 +24,7 @@ mysql = MySQL(server)
 @server.get('/supplier')
 def index():
     try:
-        return contraller.show_supplier(mysql)
+        return supplier_contraller.show_supplier(mysql)
     except Exception as error:
         return jsonify({"Message": error})
 
@@ -33,23 +33,18 @@ def index():
 @server.delete('/supplier/<id>')
 def supplier_delete(id):
     try:
-        return contraller.delete_supplier(mysql, id)
-    except Exception as ex:
-        return page_not_found(ex)
+        return supplier_contraller.delete_supplier(mysql, id)
+    except ValueError:
+        return jsonify({"Message": "Error"})
 
 
 # this route is created to update data of this service
 @server.put('/supplier/<id>')
 def supplier_update(id):
     try:
-        return contraller.update_supplier(mysql, id)
-    except Exception as ex:
-        return page_not_found(ex)
-
-
-# A function is created to show when a page is not found.
-def page_not_found(error):
-    return render_template('404.html')
+        return supplier_contraller.update_supplier(mysql, id)
+    except ValueError:
+        return jsonify({"message": "Error"})
 
 
 # the application is executed
