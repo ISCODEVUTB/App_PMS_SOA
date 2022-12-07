@@ -2,6 +2,7 @@
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
+from os import getenv
 import stock_controller
 
 # The access point is created
@@ -11,10 +12,10 @@ server = Flask(__name__)
 CORS(server)
 
 # The connection point to the base is created.
-server.config['MYSQL_HOST'] = 'us-cdbr-east-06.cleardb.net'
-server.config['MYSQL_USER'] = 'bee0e9755133d2'
-server.config['MYSQL_PASSWORD'] = 'f3e9360a'
-server.config['MYSQL_DB'] = 'heroku_23edc9681868d22'
+server.config['MYSQL_HOST'] = getenv('HOST')
+server.config['MYSQL_USER'] = getenv('USER')
+server.config['MYSQL_PASSWORD'] = getenv('PASSWORD')
+server.config['MYSQL_DB'] = getenv('DB')
 mysql = MySQL(server)
 
 
