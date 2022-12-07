@@ -14,11 +14,11 @@ class Cart(object):
 
     @property
     def id_product(self) -> int:
-        return self._idProduct
+        return self._id_product
 
     @id_product.setter
     def id_product(self, id_product: int):
-        self._idProduct = id_product
+        self._id_product = id_product
 
     @property
     def name(self) -> str:
@@ -62,11 +62,11 @@ class Cart(object):
 
     @property
     def sup_name(self) -> str:
-        return self._supName
+        return self._sup_name
 
     @sup_name.setter
     def sup_name(self, sup_name: str):
-        self._supName = sup_name
+        self._sup_name = sup_name
 
     def __str__(self):
         return '({0}, {1}, {2}, {3}, {4}, {5}, {6})'.format(self.id_product, self.name, self.sup_name, self.price, self.motor
