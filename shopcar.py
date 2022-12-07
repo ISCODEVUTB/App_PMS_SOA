@@ -1,6 +1,5 @@
 # we invoke the necessary libraries
 from flask import Flask, render_template,jsonify, request
-from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
@@ -10,7 +9,6 @@ server = Flask(__name__)
 csrf = CSRFProtect()
 csrf.init_app(server)
 
-CORS(server)
 
 server.config['MYSQL_HOST'] = getenv('HOST')
 server.config['MYSQL_USER'] = getenv('USER')
@@ -21,11 +19,10 @@ server.config['MYSQL_DB'] = getenv('DB')
 mysql = MySQL(server)
 
 
-@cross_origin
 @server.get('/')
 def index():
     try:
-        return contraller.clear()
+        return shopcar_controller.clear()
     except Exception as error:
         return page_not_found(error)
 
@@ -34,34 +31,31 @@ def index():
 @server.route('/show')
 def show():
     try:
-        return contraller.show_car()
+        return shopcar_controller.show_car()
     except Exception as ex:
         return page_not_found(ex)
 
 
-@cross_origin
 @server.route('/shopcar')
 def car():
     try:
-        return contraller.show_list()
+        return shopcar_controller.show_list()
     except Exception as ex:
         return page_not_found(ex)
 
 
-@cross_origin
 @server.get('/shopcar/<id>')
 def car_product(id):
     try:
-        return contraller.into_shop_car(mysql, id)
+        return shopcar_controller.into_shop_car(mysql, id)
     except Exception as ex:
         return page_not_found(ex)
 
 
 # This function remove the cart by the ID
-@cross_origin
 @server.get('/del/<id>')
 def del_cart(id):
-    return contraller.delate_cart(id)
+    return shopcar_controller.delate_cart(id)
     
 
 

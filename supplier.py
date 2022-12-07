@@ -1,7 +1,6 @@
 # we invoke the necessary libraries
 from flask import Flask, render_template, jsonify
 from flask_mysqldb import MySQL
-from flask_cors import CORS, cross_origin
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 import supplier_contraller
@@ -21,7 +20,6 @@ server.config['MYSQL_DB'] = getenv('DB')
 mysql = MySQL(server)
 
 
-@cross_origin
 # The route to enter the service is created
 @server.get('/supplier')
 def index():
@@ -31,7 +29,6 @@ def index():
         return jsonify({"Message": error})
 
 
-@cross_origin
 # this route is created to remove data from this service
 @server.delete('/supplier/<id>')
 def supplier_delete(id):
@@ -41,7 +38,6 @@ def supplier_delete(id):
         return page_not_found(ex)
 
 
-@cross_origin
 # this route is created to update data of this service
 @server.put('/supplier/<id>')
 def supplier_update(id):
@@ -51,7 +47,6 @@ def supplier_update(id):
         return page_not_found(ex)
 
 
-@cross_origin
 # A function is created to show when a page is not found.
 def page_not_found(error):
     return render_template('404.html')
