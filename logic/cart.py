@@ -4,13 +4,13 @@ class Cart(object):
                  security: str = "Name", gearbox: str = "Name"):
         """Cart builder object"""
 
-        self._idProduct = id_product
+        self._id_product = id_product
         self._name = name
         self._price = price
         self._motor = motor
         self._security = security
         self._gearbox = gearbox
-        self._supName = sup_name
+        self._sup_name = sup_name
 
     @property
     def id_product(self) -> int:
