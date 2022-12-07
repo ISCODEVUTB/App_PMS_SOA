@@ -18,26 +18,26 @@ def show_supplier(mysql):
         else:
             return jsonify({'message: "There are no data'})
     except ValueError:
-        return jsonify({'message: "Error'})
+        return jsonify({'message': "Error"})
 
 
 # This function deletes a data from a supplier
-def delete_supplier(mysql, idSupplier):
+def delete_supplier(mysql, id_supplier):
     try:
         cursor = mysql.connection.cursor()
         cursor.execute("delete from supplier where idsupplier = (%s)", (idSupplier,))
         data = cursor.fetchall()
         print("Provider to be deleted: ", (data))
         cursor.execute("select idsupplier, name, nit, address, phone, email from supplier where idsupplier = (%s)",
-                     (idSupplier,))
+                     (id_supplier,))
         mysql.connection.commit()
         return show_supplier(mysql)
-    except Exception as ex:
-        return jsonify({'message: "Error'})
+    except ValueError:
+        return jsonify({'message': "Error"})
 
 
 # This function updates a data of a supplier
-def updateSupplier(mysql, id_supplier):
+def update_supplier(mysql, id_supplier):
     try:
         cursor = mysql.connection.cursor()
         cursor.execute("update supplier set name = '{0}', nit = '{1}', address = '{2}', phone = '{3}',"
