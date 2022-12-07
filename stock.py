@@ -1,6 +1,5 @@
 # we invoke the necessary libraries
 from flask import Flask, jsonify
-# from config import config
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 import stock_controller

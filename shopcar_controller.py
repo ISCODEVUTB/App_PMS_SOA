@@ -25,7 +25,7 @@ def show_list():
     return jsonify({'shopping_cart': data, 'total_price': price_total()})
 
 
-def into_shopcar(mysql, idProduct):
+def into_shopcar(mysql, id_product):
     cursor = mysql.connection.cursor()
     cursor.execute("select v.name, su.name, s.selling_price, v.motor, v.gearbox, v.security "
                    "from stock s inner join vehicle v on (s.name = v.id)"
@@ -33,8 +33,8 @@ def into_shopcar(mysql, idProduct):
     data = cursor.fetchall()
     if data is not None:
         for fila in data:
-            c = Cart(idProduct=idProduct, name=fila[0], supName=fila[1], price=fila[2], motor=fila[3], gearbox=fila[4],
-                     security=fila[5])
+            c = Cart(id_product=idProduct, name=fila[0], sup_name=fila[1], price=fila[2], motor=fila[3],
+                     security=fila[5], gearbox=fila[4])
             model.append(c)
             print(data)
         data = [(i.idProduct, i.name, i.supName, i.price, i.motor, i.gearbox, i.security) for i in model]
