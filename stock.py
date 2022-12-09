@@ -1,10 +1,10 @@
 # we invoke the necessary libraries
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
-from flask_cors import CORS, cross_origin
 from os import getenv
+from dotenv import load_dotenv
 from flask_wtf.csrf import CSRFProtect
-import stock_controller
+from stock_controller import *
 
 # The access point is created
 server = Flask(__name__)
@@ -24,7 +24,7 @@ mysql = MySQL(server)
 @server.get('/vehicles')
 def index():
     try:
-        return controller.stock(mysql)
+        return stock(mysql)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -33,7 +33,7 @@ def index():
 @server.get('/vehicle/<string:id>')
 def get_vehicle(id):
     try:
-       return controller.vehicle(mysql, id)
+       return vehicle(mysql, id)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -42,7 +42,7 @@ def get_vehicle(id):
 @server.post('/vehicle')
 def create_vehicle():
     try:
-        return controller.create_vehicle(mysql)
+        return create_vehicle(mysql)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -51,7 +51,7 @@ def create_vehicle():
 @server.post('/stock')
 def create_stock():
     try:
-        return controller.create_stock(mysql)
+        return create_stock(mysql)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -60,7 +60,7 @@ def create_stock():
 @server.delete("/stock/<string:id>")
 def delete_stock(id):
     try:
-        return controller.delete_stock(mysql, id)
+        return delete_stock(mysql, id)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -69,4 +69,5 @@ def delete_stock(id):
 
 # the application is executed
 if __name__ == '__main__':
+    load_dotenv()
     server.run(debug=True)

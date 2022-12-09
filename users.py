@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from os import getenv
 from flask_wtf.csrf import CSRFProtect
 import users_controller
+from dotenv import load_dotenv
 
 # The access point is created
 server = Flask(__name__)
@@ -56,4 +57,5 @@ def update_user():
 
 # the application is executed
 if __name__ == '__main__':
+    load_dotenv()
     server.run(debug=True, port=6000)
