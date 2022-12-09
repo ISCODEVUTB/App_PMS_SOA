@@ -2,7 +2,6 @@ import MySQLdb
 from os import getenv
 from dotenv import load_dotenv
 import sys
-import json
 from stock_controller import *
 from unittest import TestCase
 load_dotenv()
