@@ -1,4 +1,3 @@
-from flask import jsonify, request
 import json
 
 
@@ -39,34 +38,33 @@ def vehicle(mysql, id):
 
 # the function allowing the creation of a new vehicle is created
 def create_vehicle(mysql, info: dict):
-    cursor = mysql.cursor()
-    sql = "insert into vehicle(name, motor, gearbox, security, type, url, description, data_sheet) values " \
-          "('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')".format(info['name'], info['motor'],
-                                                                            info['gearbox'], info['security'],
-                                                                            info['type'], info['url'],
-                                                                            info['description'], info['data_sheet'])
-    cursor.execute(sql)
-    mysql.connection.commit()
-    info = {'message': 'Vehicle created'}
-    return json.dumps(info)
+   cursor = mysql.cursor()
+   sql = "insert into vehicle (name, motor, gearbox, security, type, url, description, data_sheet) values " \
+         "(%s, %s, %s, %s, %s, %s, %s, %s)"
+   val = (info['name'], info['motor'], info['gearbox'], info['security'], info['type'], info['url'], info['description'], info['data_sheet'])
+   cursor.execute(sql, val)
+   mysql.commit()
+   message = {"message": "Vehicle created"}
+   return json.dumps(message)
 
 
 # the function is created that allows a vehicle to be removed from stock
 # the function that allows you to create a new stock is created
-def create_stock(mysql):
-    cursor = mysql.connection.cursor()
-    sql = """insert into stock (name, supplier, selling_price, quantity) 
-           values ('{0}', '{1}', '{2}', '{3}')""".format(request.json['name'], request.json['supplier'],
-                                                         request.json['selling_price'], request.json['quantity'])
-    cursor.execute(sql)
-    mysql.connection.commit()
-    return jsonify({'message': 'Stock update'})
+def create_stock(mysql, info: dict):
+    cursor = mysql.cursor()
+    sql = "insert into stock (name, supplier, selling_price, quantity) values (%s, %s, %s, %s)"
+    val = (info['name'], info['supplier'], info['selling_price'], info['quantity'])
+    cursor.execute(sql, val)
+    mysql.commit()
+    message = {"message": "Stock created"}
+    return json.dumps(message)
 
 
 # the function is created that allows a vehicle to be removed from stock
 def delete_stock(mysql, id):
     sql = "delete from stock where idstock = '{0}'".format(id)
-    cursor = mysql.connection.cursor()
+    cursor = mysql.cursor()
     cursor.execute(sql)
-    mysql.connection.commit()
-    return jsonify({'message': "The stock was successfully removed"})
+    mysql.commit()
+    message = {"message": "Stock deleted"}
+    return json.dumps(message)
