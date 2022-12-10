@@ -1,24 +1,45 @@
-import MySQLdb
-from os import getenv
-from dotenv import load_dotenv
-import sys
-from stock_controller import *
 from unittest import TestCase
+from stock_controller import *
+import mysql.connector
+from dotenv import load_dotenv
+from os import getenv
+
 load_dotenv()
 
 
-# The connection point to the base is created.
 def connection():
     try:
-        db = MySQLdb.connect(host=getenv('HOST'), user=getenv('USER'), passwd=getenv('PASSWORD'), db=getenv('DB'))
-        return db
-    except MySQLdb.Error as e:
-        print("Error %d: %s" % (e.args[0], e.args[1]))
-        sys.exit(1)
+        connec = mysql.connector.connect(host=getenv('HOST'), user=getenv('USER'), password=getenv('PASSWORD'),
+                                         database=getenv('DB'))
+        return connec
+    except ValueError:
+        print("Connection error")
 
 
-# verify that the stocks exists
-class TestApiStock(TestCase):
+class TestStock(TestCase):
+    info = {
+        'name': 'T-Cross',
+        'motor': '1.0 TSI 115 CV',
+        'gearbox': 'Manual',
+        'security': 'ABS, ESP, ASR, EDS, Airbag',
+        'type': 4,
+        'url': 'https://awscdn.volkswagen.co/media/Abstract_Image_B1280_Component.Box_Stage_Fullscreen_Item_Media_Image_Image_Component/51614-stage-428138-media-child-image-b1280/dh-1435-6b7102/389b850c/1657115433/t-cross-volkswagen-colombia.jpg',
+        'description': 'El T-Cross es un SUV compacto que combina la versatilidad de un SUV con la comodidad de un sedán. '
+                       'Con un diseño moderno y deportivo, el T-Cross es el SUV ideal para disfrutar de la ciudad.',
+        'data_sheet': 'https://www.chevrolet.com.co/content/dam/chevrolet/south-america/colombia/espanol/index/technical-sheets/17-pdfs/ficha-tecnica-onix-turbo-hb.pdf'
+    }
+
     def test_all_stock(self):
-        info = stock(connection())
-        self.assertEquals(info.status_code, 200)
+        r = stock(connection())
+        result = json.loads(r)
+        self.assertEqual(len(result['vehicles']), 7)
+
+    def test_vehicle(self):
+        r = vehicle(connection(), 1)
+        result = json.loads(r)
+        self.assertEqual(result['vehicle']['name'], 'Voyage')
+
+    """def test_create_vehicle(self):
+        r = create_vehicle(connection(), self.info)
+        result = json.loads(r)
+        self.assertEqual(result, 'Vehicle created')"""
