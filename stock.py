@@ -4,7 +4,8 @@ from flask_mysqldb import MySQL
 from os import getenv
 from dotenv import load_dotenv
 from flask_wtf.csrf import CSRFProtect
-from stock_controller import *
+import stock_controller
+
 
 # The access point is created
 server = Flask(__name__)
@@ -24,7 +25,7 @@ mysql = MySQL(server)
 @server.get('/vehicles')
 def index():
     try:
-        return stock(mysql)
+        return stock_controller.stock(mysql)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -33,7 +34,7 @@ def index():
 @server.get('/vehicle/<string:id>')
 def get_vehicle(id):
     try:
-       return vehicle(mysql, id)
+       return stock_controller.vehicle(mysql, id)
     except Exception as ex:
         return jsonify({'message': ex})
 

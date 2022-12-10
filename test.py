@@ -1,8 +1,9 @@
 from unittest import TestCase
-from stock_controller import *
+import stock_controller
 import mysql.connector
 from dotenv import load_dotenv
 from os import getenv
+import json
 
 load_dotenv()
 
@@ -30,12 +31,12 @@ class TestStock(TestCase):
     }
 
     def test_all_stock(self):
-        r = stock(connection())
+        r = stock_controller.stock(connection())
         result = json.loads(r)
         self.assertEqual(len(result['vehicles']), 7)
 
     def test_vehicle(self):
-        r = vehicle(connection(), 1)
+        r = stock_controller.vehicle(connection(), 1)
         result = json.loads(r)
         self.assertEqual(result['vehicle']['name'], 'Voyage')
 
