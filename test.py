@@ -50,10 +50,6 @@ class TestStock(unittest.TestCase):
         result = json.loads(r)
         self.assertEqual(result['message'], 'Stock deleted')
 
-    def test_suma(self):
-        r = suma(1, 2)
-        self.assertEqual(r, 3)
-
 
 # Path: stock_controller.py
 if __name__ == '__main__':
