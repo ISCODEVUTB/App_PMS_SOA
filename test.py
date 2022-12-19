@@ -7,6 +7,8 @@ import json
 
 
 class TestStock(unittest.TestCase):
+    info_test = "Test passed"
+    test_expected = "Test passed"
     info = {
         'name': 'Nivus',
         'motor': ' 200 TSI',
@@ -29,8 +31,7 @@ class TestStock(unittest.TestCase):
         r = stock(connection())
         result = json.loads(r)
         if 'vehicles' in result:
-            info = 'Test passed'
-        self.assertEqual(info, 'Test passed')
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
     def test_vehicle(self):
         r = vehicle(connection(), 1)
@@ -56,8 +57,7 @@ class TestStock(unittest.TestCase):
         r = index()
         result = json.loads(r)
         if 'vehicles' in result:
-            info = 'Test passed'
-        self.assertEqual(info, 'Test passed')
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
     def test_stock_get_vehicle(self):
         r = get_vehicle(1)
@@ -71,13 +71,12 @@ class TestStock(unittest.TestCase):
 
 
 class TesTSupplier(unittest.TestCase):
-    info_test = 'Test passed'
 
     def test_show_supplier_controller_ok(self):
         r = show_supplier(connection())
         result = json.loads(r)
         if 'suppliers' in result:
-            self.assertEqual(TesTSupplier.info_test, 'Test passed')
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
     def test_delete_supplier_controller(self):
         r = delete_supplier(connection(), 3)
