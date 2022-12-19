@@ -1,8 +1,6 @@
 # we invoke the necessary libraries
 from flask import Flask, jsonify
-from flask_mysqldb import MySQL
-from os import getenv
-from dotenv import load_dotenv
+from app import connection
 from flask_wtf.csrf import CSRFProtect
 import stock_controller
 
@@ -13,19 +11,11 @@ csrf = CSRFProtect()
 csrf.init_app(server)
 
 
-# The connection point to the base is created.
-server.config['MYSQL_HOST'] = getenv('HOST')
-server.config['MYSQL_USER'] = getenv('USER')
-server.config['MYSQL_PASSWORD'] = getenv('PASSWORD')
-server.config['MYSQL_DB'] = getenv('DB')
-mysql = MySQL(server)
-
-
 # The route to enter the service is created.
 @server.get('/vehicles')
 def index():
     try:
-        return stock_controller.stock(mysql)
+        return stock_controller.stock(connection())
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -34,7 +24,7 @@ def index():
 @server.get('/vehicle/<string:id>')
 def get_vehicle(id):
     try:
-       return stock_controller.vehicle(mysql, id)
+       return stock_controller.vehicle(connection(), id)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -43,7 +33,7 @@ def get_vehicle(id):
 @server.post('/vehicle')
 def create_vehicle():
     try:
-        return create_vehicle(mysql)
+        return create_vehicle(connection())
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -52,16 +42,16 @@ def create_vehicle():
 @server.post('/stock')
 def create_stock():
     try:
-        return create_stock(mysql)
+        return create_stock(connection())
     except Exception as ex:
         return jsonify({'message': ex})
 
 
 # The route is created to remove the stock
 @server.delete("/stock/<string:id>")
-def delete_stock(id):
+def stock_delete(id):
     try:
-        return delete_stock(mysql, id)
+        return stock_controller.delete_stock(connection(),id)
     except Exception as ex:
         return jsonify({'message': ex})
 
@@ -70,5 +60,4 @@ def delete_stock(id):
 
 # the application is executed
 if __name__ == '__main__':
-    load_dotenv()
     server.run(debug=True)
