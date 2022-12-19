@@ -47,7 +47,7 @@ class TestStock(unittest.TestCase):
         self.assertEqual(result['message'], 'Stock created')
 
     def test_delete_stock_controller(self):
-        r = stock_delete(connection(), 214)
+        r = delete_stock(connection(), 214)
         result = json.loads(r)
         self.assertEqual(result['message'], 'Stock deleted')
 
