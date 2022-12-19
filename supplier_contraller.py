@@ -19,7 +19,7 @@ def show_supplier(mysql):
         else:
             return json.dumps({'message': "There are no data"})
     except ValueError:
-        return json.dumps({'message': "Error"})
+        return jsonify({'message': "Error"})
 
 
 # This function deletes a data from a supplier
@@ -30,11 +30,11 @@ def delete_supplier(mysql, id_supplier):
         data = cursor.fetchall()
         print("Provider to be deleted: ", (data))
         cursor.execute("select idsupplier, name, nit, address, phone, email from supplier where idsupplier = (%s)",
-                       (id_supplier,))
+                     (id_supplier,))
         mysql.connection.commit()
         return show_supplier(mysql)
     except ValueError:
-        return json.dumps({'message': "Error"})
+        return jsonify({'message': "Error"})
 
 
 # This function updates a data of a supplier
@@ -48,4 +48,4 @@ def update_supplier(mysql, id_supplier):
         mysql.connection.commit()
         return show_supplier(mysql)
     except ValueError:
-        return json.dumps({'message: "Error'})
+        return jsonify({'message: "Error'})

@@ -1,7 +1,7 @@
 import unittest
 from stock_controller import stock, delete_stock, vehicle, create_stock, create_vehicle
 from app import connection
-from stock import index, get_vehicle, stock_delete, create_stock, create_vehicle
+from stock import index, get_vehicle, stock_delete
 from supplier_contraller import show_supplier
 import json
 
@@ -48,7 +48,7 @@ class TestStock(unittest.TestCase):
         self.assertEqual(result['message'], 'Stock created')
 
     def test_delete_stock(self):
-        r = stock_delete_stock(connection())
+        r = delete_stock(connection(), 254)
         result = json.loads(r)
         self.assertEqual(result['message'], 'Stock deleted')
 
