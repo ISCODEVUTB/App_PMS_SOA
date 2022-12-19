@@ -1,6 +1,6 @@
 import unittest
 from stock_controller import stock, delete_stock, vehicle, create_stock, create_vehicle
-from app import connection, suma
+from app import connection
 import json
 
 
