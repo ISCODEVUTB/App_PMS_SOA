@@ -1,11 +1,11 @@
 # we invoke the necessary libraries
-from flask import jsonify, request
+import json
 
 
 # This function returns the supplier information
 def show_supplier(mysql):
     try:
-        cursor = mysql.connection.cursor()
+        cursor = mysql.cursor()
         cursor.execute("select idsupplier, name, nit, address, phone, email from supplier")
         data = cursor.fetchall()
         if data != None:
@@ -14,11 +14,12 @@ def show_supplier(mysql):
                 list_supplier_get = {'id_supplier': fila[0], 'name': fila[1], 'nit': fila[2], 'address': fila[3],
                                      'phone': fila[4], 'email': fila[5]}
                 list_supplier.append(list_supplier_get)
-            return jsonify({'list_supplier': list_supplier, 'messeger': "List of suppliers"})
+            info = {'vehicles': list_supplier}
+            return json.dumps(info)
         else:
-            return jsonify({'message: "There are no data'})
+            return json.dumps({'message': "There are no data"})
     except ValueError:
-        return jsonify({'message': "Error"})
+        return json.dumps({'message': "Error"})
 
 
 # This function deletes a data from a supplier
@@ -29,11 +30,11 @@ def delete_supplier(mysql, id_supplier):
         data = cursor.fetchall()
         print("Provider to be deleted: ", (data))
         cursor.execute("select idsupplier, name, nit, address, phone, email from supplier where idsupplier = (%s)",
-                     (id_supplier,))
+                       (id_supplier,))
         mysql.connection.commit()
         return show_supplier(mysql)
     except ValueError:
-        return jsonify({'message': "Error"})
+        return json.dumps({'message': "Error"})
 
 
 # This function updates a data of a supplier
@@ -47,4 +48,4 @@ def update_supplier(mysql, id_supplier):
         mysql.connection.commit()
         return show_supplier(mysql)
     except ValueError:
-        return jsonify({'message: "Error'})
+        return json.dumps({'message: "Error'})
