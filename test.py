@@ -2,7 +2,7 @@ import unittest
 from stock_controller import stock, delete_stock, vehicle, create_stock, create_vehicle
 from app import connection
 from stock import index, get_vehicle, stock_delete
-from supplier_contraller import show_supplier
+from supplier_contraller import show_supplier, delete_supplier
 import json
 
 
@@ -73,11 +73,16 @@ class TestStock(unittest.TestCase):
 class TesTSupplier(unittest.TestCase):
     info_test = 'Test passed'
 
-    def test_show_supplier(self):
+    def test_show_supplier_controller_ok(self):
         r = show_supplier(connection())
         result = json.loads(r)
         if 'suppliers' in result:
             self.assertEqual(TesTSupplier.info_test, 'Test passed')
+
+    def test_delete_supplier_controller(self):
+        r = delete_supplier(connection(), 3)
+        result = json.loads(r)
+        self.assertEqual(result['status'], 'deleted')
 
 
 # Path: stock_controller.py
