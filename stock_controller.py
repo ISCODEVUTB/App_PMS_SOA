@@ -3,22 +3,19 @@ import json
 
 # the function that allows to list all vehicles in stock is created
 def stock(mysql):
-    try:
-        cursor = mysql.cursor()
-        sql = "select s.idstock, v.name, su.name, s.selling_price, v.motor, v.gearbox, v.security, t.name, v.url " \
-            "from stock s inner join vehicle v on (s.name = v.id) inner join supplier su on (s.supplier = su.idsupplier)"\
-            " inner join type t on (v.type = t.idtype)"
-        cursor.execute(sql)
-        data = cursor.fetchall()
-        vehicles = []
-        for fila in data:
-            vehicle = {'id': fila[0], 'name': fila[1], 'supplier': fila[2], 'price': fila[3], 'motor': fila[4],
-                    'gearbox': fila[5], 'security': fila[6], 'type': fila[7], 'image': fila[8]}
-            vehicles.append(vehicle)
+    cursor = mysql.cursor()
+    sql = "select s.idstock, v.name, su.name, s.selling_price, v.motor, v.gearbox, v.security, t.name, v.url " \
+          "from stock s inner join vehicle v on (s.name = v.id) inner join supplier su on (s.supplier = su.idsupplier)"\
+        " inner join type t on (v.type = t.idtype)"
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    vehicles = []
+    for fila in data:
+        vehicle = {'id': fila[0], 'name': fila[1], 'supplier': fila[2], 'price': fila[3], 'motor': fila[4],
+                   'gearbox': fila[5], 'security': fila[6], 'type': fila[7], 'image': fila[8]}
+        vehicles.append(vehicle)
         info = {'vehicles': vehicles}
-        return json.dumps(info)
-    except ValueError:
-        return 'Error'
+    return json.dumps(info)
 
 
 # the function allowing to list the information of a particular vehicle is created
@@ -27,13 +24,10 @@ def vehicle(mysql, id):
     sql = "select s.idstock, v.name, su.name, s.selling_price, v.motor, v.gearbox, v.security, t.name, v.url, v.description, v.data_sheet from stock s inner join vehicle v on (s.name = v.id) inner join supplier su on (s.supplier = su.idsupplier) inner join type t on (v.type = t.idtype) where s.idstock = '{0}'".format(id)
     cursor.execute(sql)
     data = cursor.fetchone()
-    if data is not None:
-        vehicle = {'id': data[0], 'name': data[1], 'supplier': data[2], 'price': data[3], 'motor': data[4], 'gearbox': data[5],
-                   'security': data[6], 'type': data[7], 'image': data[8], 'description': data[9], 'data_sheet': data[10]}
-        info = {'vehicle': vehicle}
-        return json.dumps(info)
-    else:
-        return jsonify({'message': 'Vehicle not found'})
+    vehicle = {'id': data[0], 'name': data[1], 'supplier': data[2], 'price': data[3], 'motor': data[4], 'gearbox': data[5],
+               'security': data[6], 'type': data[7], 'image': data[8], 'description': data[9], 'data_sheet': data[10]}
+    info = {'vehicle': vehicle}
+    return json.dumps(info)
 
 
 # the function allowing the creation of a new vehicle is created

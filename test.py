@@ -1,9 +1,10 @@
-from unittest import TestCase
-from stock_controller import *
-from app import *
+import unittest
+from stock_controller import stock, delete_stock, vehicle, create_stock, create_vehicle
+from app import connection, suma
+import json
 
 
-class TestStock(TestCase):
+class TestStock(unittest.TestCase):
     info = {
         'name': 'Nivus',
         'motor': ' 200 TSI',
@@ -27,8 +28,6 @@ class TestStock(TestCase):
         result = json.loads(r)
         if 'vehicles' in result:
             info = 'Test passed'
-        else:
-            info = 'Test failed'
         self.assertEqual(info, 'Test passed')
 
     def test_vehicle(self):
@@ -50,3 +49,12 @@ class TestStock(TestCase):
         r = delete_stock(connection(), 144)
         result = json.loads(r)
         self.assertEqual(result['message'], 'Stock deleted')
+
+    def test_suma(self):
+        r = suma(1, 2)
+        self.assertEqual(r, 3)
+
+
+# Path: stock_controller.py
+if __name__ == '__main__':
+    unittest.main()
