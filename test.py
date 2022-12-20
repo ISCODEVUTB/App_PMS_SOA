@@ -5,6 +5,7 @@ from stock import index, get_vehicle, stock_delete, create_vehicle_stock, create
 from supplier_contraller import show_supplier, delete_supplier, update_supplier
 from supplier import index, supplier_delete, supplier_update
 from users_controller import all_user, get_user, update_user, create_user
+from users import all_users_, user, user_create, user_update
 from os import getenv
 from dotenv import load_dotenv
 import json
@@ -178,7 +179,27 @@ class TestUser(unittest.TestCase):
         result = json.loads(r)
         self.assertEqual(result['Message'], 'The user was successfully created')
 
+    def test_all_users(self):
+        r = all_users_()
+        result = json.loads(r)
+        if 'users' in result:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
+    def test_user(self):
+        r = user(TestUser.info)
+        result = json.loads(r)
+        if 'user' in result:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+
+    def user_update(self):
+        r = user_update(TestUser.info_update)
+        result = json.loads(r)
+        self.assertEqual(result['Message'], 'The user was successfully updated')
+
+    def test_user_create(self):
+        r = user_create(TestUser.info_create)
+        result = json.loads(r)
+        self.assertEqual(result['Message'], 'The user was successfully created')
 
 
 # Path: stock_controller.py
