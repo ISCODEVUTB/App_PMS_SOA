@@ -1,7 +1,7 @@
 class Cart(object):
 
     def __init__(self, id_product: int, name: str = "Name", sup_name: str = "Name", price: int = 0, motor: str = "Name",
-                 security: str = "Name", gearbox: str = "Name"):
+                 security: str = "Name", gearbox: str = "Name") -> None:
         """Cart builder object"""
 
         self._id_product = id_product
@@ -27,14 +27,6 @@ class Cart(object):
     @name.setter
     def name(self, name: str):
         self._name = name
-
-    @property
-    def price(self) -> int:
-        return self._price
-
-    @price.setter
-    def prince(self, price: int):
-        self._price = price
 
     @property
     def motor(self) -> str:
@@ -68,11 +60,14 @@ class Cart(object):
     def sup_name(self, sup_name: str):
         self._sup_name = sup_name
 
+    @property
+    def price(self) -> int:
+        return self._price
+
+    @price.setter
+    def price(self, price: int):
+        self._price = price
+
     def __str__(self):
-        return '({0}, {1}, {2}, {3}, {4}, {5}, {6})'.format(self.id_product, self.name, self.sup_name, self.price, self.motor
-                                                       , self.security, self.gearbox)
-
-
-if __name__ == '__main__':
-    car = Cart(id_product=1, name="AUDI R8", price=1049200218)
-    print(car)
+        return f"ID: {self.id_product}, Name: {self.name}, Price: {self.price}, Motor: {self.motor}, Security: " \
+               f"{self.security}, Gearbox: {self.gearbox}, Supplier: {self.sup_name}"
