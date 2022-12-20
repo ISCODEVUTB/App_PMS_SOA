@@ -1,8 +1,8 @@
-from flask import jsonify, request
+import json
 
 
 def all_user(mysql):
-    cursor = mysql.connection.cursor()
+    cursor = mysql.cursor()
     sql = "select u.name, u.last_name, u.email, u.address, r.name from users u inner join rool r on (u.rool = r.idrool)"
     cursor.execute(sql)
     data = cursor.fetchall()
@@ -10,27 +10,26 @@ def all_user(mysql):
     for fila in data:
         user_pro = {'name': fila[0], 'last name': fila[1], 'email': fila[2], 'address': fila[3],  'rool': fila[4]}
         users.append(user_pro)
-    return jsonify({"users": users})
+    info = {'users': users}
+    return json.dumps(info)
 
 
-def user(mysql):
-    user_name = request.args.get('user_name')
-    email = request.args.get('email')
-    cursor = mysql.connection.cursor()
-    sql = "select u.name, u.last_name, u.user, u.email, r.name from users u inner join rool r on (u.rool = r.idrool)" \
-          "where u.user = '{0}' or u.email = '{1}'".format(user_name, email)
+def get_user(mysql, info: dict):
+    user_name = info['username']
+    email = info['email']
+    password = info['password']
+    cursor = mysql.cursor()
+    sql = "select u.id, u.name, u.last_name, u.user, u.email, r.name from users u inner join rool r on (u.rool = r.idrool)" \
+          "where (u.user = '{0}' or u.email = '{1}') and u.password = '{2}'".format(user_name, email, password)
     cursor.execute(sql)
     data = cursor.fetchone()
-    user_info = []
-    if data is not None:
-        user_pro = {'name': data[0], 'last name': data[1], 'username': data[2], 'email': data[3], 'rool': data[4]}
-        user_info.append(user_pro)
-        return jsonify({"user_info": user_info})
-    else:
-        return jsonify(user_info)
+    user_info = {'id': data[0], 'name': data[1], 'last name': data[2], 'username': data[3], 'email': data[4],
+                 'rool': data[5]}
+    info = {'user': user_info}
+    return json.dumps(info)
 
 
-def update_user(mysql):
+def update_user(mysql, info: dict):
     try:
         cursor = mysql.connection.cursor()
         sql = "update users set name = '{0}', last_name = '{1}', user = '{2}', email = '{3}', password = '{4}'," \

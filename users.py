@@ -31,7 +31,7 @@ def all_users():
 @server.get("/user")
 def user():
     try:
-        data = users_controller.user(mysql)
+        data = users_controller.get_user(mysql)
         return data
     except ValueError:
         return {"Message": "Error"}

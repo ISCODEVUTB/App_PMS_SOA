@@ -4,6 +4,7 @@ from app import connection
 from stock import index, get_vehicle, stock_delete, create_vehicle_stock, create_stock_
 from supplier_contraller import show_supplier, delete_supplier, update_supplier
 from supplier import index, supplier_delete, supplier_update
+from users_controller import all_user, get_user, update_user, create_user
 import json
 
 
@@ -123,6 +124,26 @@ class TesTSupplier(unittest.TestCase):
         r = supplier_update(TesTSupplier.info)
         result = json.loads(r)
         self.assertEqual(result['status'], 'updated')
+
+
+class TestUser(unittest.TestCase):
+    info = {
+        "username": "Esneider2",
+        "email": "esneydergp69@gmail.com",
+        "password": "123456",
+    }
+
+    def test_all_users_controller(self):
+        r = all_user(connection())
+        result = json.loads(r)
+        if 'users' in result:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+
+    def test_get_user_controller(self):
+        r = get_user(connection(), TestUser.info)
+        result = json.loads(r)
+        self.assertEqual(result['user']['username'], 'Esneider2')
+
 
 
 # Path: stock_controller.py
