@@ -1,5 +1,5 @@
 # we invoke the necessary libraries
-from flask import jsonify
+import json
 from logic.cart import Cart
 
 model = []
@@ -8,25 +8,28 @@ aux = []
 
 def clear():
     model.clear()
-    return jsonify({"Welcome": 'Welcome tu api car'})
+    info = {"Welcome": 'Welcome tu api car'}
+    return json.dumps(info)
 
 
 def show_car():
-    data = [(i.idProduct, i.name, i.supName, i.price, i.motor, i.gearbox, i.security) for i in model]
+    data = [(i.id_product, i.name, i.sup_name, i.price, i.motor, i.gearbox, i.security) for i in model]
     if data is not None:
-        return jsonify({'count': len(data), 'total_price': price_total()})
+        info = {'count': len(data), 'total_price': price_total()}
+        return json.dumps(info)
     else:
-        return jsonify({'message: "There are no data'})
+        info = {'count': 0, 'total_price': 0}
+        return json.dumps(info)
 
 
 def show_list():
-    data = [(i.idProduct, i.name, i.supName, i.price, i.motor, i.gearbox, i.security) for i in model]
-    print(data)
-    return jsonify({'shopping_cart': data, 'total_price': price_total()})
+    data = [(i.id_product, i.name, i.sup_name, i.price, i.motor, i.gearbox, i.security) for i in model]
+    info = {'shopping_cart': data, 'total_price': price_total()}
+    return json.dumps(info)
 
 
 def into_shop_car(mysql, id_product):
-    cursor = mysql.connection.cursor()
+    cursor = mysql.cursor()
     cursor.execute("select v.name, su.name, s.selling_price, v.motor, v.gearbox, v.security "
                    "from stock s inner join vehicle v on (s.name = v.id)"
                    "inner join supplier su on (s.supplier = su.idsupplier) where s.idstock = '{0}'".format(id_product))
@@ -37,10 +40,13 @@ def into_shop_car(mysql, id_product):
                      security=fila[5], gearbox=fila[4])
             model.append(c)
             print(data)
-        data = [(i.idProduct, i.name, i.supName, i.price, i.motor, i.gearbox, i.security) for i in model]
-        return jsonify({'listProduct': data, 'message': "save to shopping cart"})
+        data = [(i.id_product, i.name, i.sup_name, i.price, i.motor, i.gearbox, i.security) for i in model]
+        info = {'listProduct': data, 'total_price': price_total(), 'Message': 'The product was successfully added',
+                'count': len(data)}
+        return json.dumps(info)
     else:
-        return jsonify({'message: "There are no data'})
+        info = {'Message': 'The product was not added'}
+        return json.dumps(info)
 
 
 def price_total():

@@ -14,26 +14,22 @@ csrf.init_app(server)
 
 @server.get("/users")
 def all_users_():
-    data = users_controller.all_user(connection())
-    return data
+    return users_controller.all_user(connection())
 
 
 @server.get("/user")
 def user(info: dict):
-    data = users_controller.get_user(connection(), info)
-    return data
+    return users_controller.get_user(connection(), info)
 
 
 @server.post('/user')
 def user_create(info: dict):
-    data = users_controller.create_user(connection(), info)
-    return data
+    return users_controller.create_user(connection(), info)
 
 
 @server.put('/update')
 def user_update(info: dict):
-    update = users_controller.update_user(connection(), info)
-    return update
+    return users_controller.update_user(connection(), info)
 
 
 # the application is executed

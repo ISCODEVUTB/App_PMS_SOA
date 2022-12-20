@@ -6,10 +6,10 @@ from supplier_contraller import show_supplier, delete_supplier, update_supplier
 from supplier import index, supplier_delete, supplier_update
 from users_controller import all_user, get_user, update_user, create_user
 from users import all_users_, user, user_create, user_update
+from shopcar_controller import show_car, show_list, into_shop_car, clear
 from os import getenv
 from dotenv import load_dotenv
 import json
-
 
 class TestStock(unittest.TestCase):
     info_test = "Test passed"
@@ -202,7 +202,40 @@ class TestUser(unittest.TestCase):
         self.assertEqual(result['Message'], 'The user was successfully created')
 
 
+class TestShopCar(unittest.TestCase):
+    def test_clear_controller(self):
+        r = clear()
+        result = json.loads(r)
+        self.assertEqual(result['Welcome'], 'Welcome tu api car')
+
+    def test_show_car_controller(self):
+        r = show_car()
+        result = json.loads(r)
+        if 'count' in result != 0:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        else:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+
+    def test_show_list_controller(self):
+        r = show_list()
+        result = json.loads(r)
+        if result['total_price'] != 0:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        else:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+
+    def test_into_car_controller(self):
+        r = into_shop_car(connection(), 44)
+        result = json.loads(r)
+        if result['Message'] == 'The product was successfully added':
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        else:
+            self.assertEqual(result['Message'], 'The product was not added')
+
+
+
 # Path: stock_controller.py
 if __name__ == '__main__':
     load_dotenv()
     unittest.main()
+
