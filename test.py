@@ -5,6 +5,8 @@ from stock import index, get_vehicle, stock_delete, create_vehicle_stock, create
 from supplier_contraller import show_supplier, delete_supplier, update_supplier
 from supplier import index, supplier_delete, supplier_update
 from users_controller import all_user, get_user, update_user, create_user
+from os import getenv
+from dotenv import load_dotenv
 import json
 
 
@@ -130,7 +132,28 @@ class TestUser(unittest.TestCase):
     info = {
         "username": "Esneider2",
         "email": "esneydergp69@gmail.com",
-        "password": "123456",
+        "password": getenv("PASSWORD_2"),
+    }
+
+    info_update = {
+        "name": "Esneider",
+        "lastname": "Guzman",
+        "user": "Esneider3",
+        "email": "guzmane@utb.edu.co",
+        "password": getenv("PASSWORD_2"),
+        "rool": 4,
+        "address": "Calle 1 # 2 - 3",
+        "id": 1
+    }
+
+    info_create = {
+        "name": "Diego",
+        "lastname": "Quintana",
+        "user": "DiegoQuintanaF",
+        "email": "dquintana@utb.edu.co",
+        "password": getenv("PASSWORD_2"),
+        "rool": 4,
+        "address": "None",
     }
 
     def test_all_users_controller(self):
@@ -144,8 +167,20 @@ class TestUser(unittest.TestCase):
         result = json.loads(r)
         self.assertEqual(result['user']['username'], 'Esneider2')
 
+    def test_update_user_controller(self):
+        r = update_user(connection(), TestUser.info_update)
+        result = json.loads(r)
+        self.assertEqual(result['Message'], 'The user was successfully updated')
+
+    def test_create_user_controller(self):
+        r = create_user(connection(), TestUser.info_create)
+        result = json.loads(r)
+        self.assertEqual(result['Message'], 'The user was successfully created')
+
+
 
 
 # Path: stock_controller.py
 if __name__ == '__main__':
+    load_dotenv()
     unittest.main()
