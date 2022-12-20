@@ -29,11 +29,11 @@ def delete_supplier(mysql, id_supplier):
 
 
 # This function updates a data of a supplier
-def update_supplier(mysql, id_supplier):
-    cursor = mysql.connection.cursor()
+def update_supplier(mysql, info):
+    cursor = mysql.cursor()
     cursor.execute("update supplier set name = '{0}', nit = '{1}', address = '{2}', phone = '{3}',"
-                   "email = '{4}' where idsupplier = '{5}'".format(request.json['name'], request.json['nit'],
-                                                                   request.json['address'], request.json['phone'],
-                                                                   request.json['email'], id_supplier))
-    mysql.connection.commit()
-    return show_supplier(mysql)
+                   "email = '{4}' where idsupplier = '{5}'".format(info['name'], info['nit'], info['address'],
+                                                                   info['phone'], info['email'], info['idsupplier']))
+    mysql.commit()
+    info = {'status': 'updated'}
+    return json.dumps(info)

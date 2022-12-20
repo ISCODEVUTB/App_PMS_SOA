@@ -2,7 +2,8 @@ import unittest
 from stock_controller import stock, delete_stock, vehicle, create_stock, create_vehicle
 from app import connection
 from stock import index, get_vehicle, stock_delete, create_vehicle_stock, create_stock_
-from supplier_contraller import show_supplier, delete_supplier
+from supplier_contraller import show_supplier, delete_supplier, update_supplier
+from supplier import index, supplier_delete, supplier_update
 import json
 
 
@@ -82,6 +83,15 @@ class TestStock(unittest.TestCase):
 
 class TesTSupplier(unittest.TestCase):
 
+    info = {
+        "name": 'Toyota',
+        "nit": "9007805105",
+        "address": "CARRERA 9 A 99 02 OFICINA 60 BOGOTA",
+        "phone": "6016381200",
+        "email": "atencion.Toyota@gmail.com",
+        "idsupplier": 3
+    }
+
     def test_show_supplier_controller_ok(self):
         r = show_supplier(connection())
         result = json.loads(r)
@@ -92,6 +102,29 @@ class TesTSupplier(unittest.TestCase):
         r = delete_supplier(connection(), 3)
         result = json.loads(r)
         self.assertEqual(result['status'], 'deleted')
+
+    def test_create_supplier_controller(self):
+        r = update_supplier(connection(), TesTSupplier.info)
+        result = json.loads(r)
+        self.assertEqual(result['status'], 'updated')
+
+    def test_show_supplier(self):
+        r = index()
+        result = json.loads(r)
+        if 'suppliers' in result:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+
+    def test_supplier_delete(self):
+        r = supplier_delete(3)
+        result = json.loads(r)
+        self.assertEqual(result['status'], 'deleted')
+
+    def test_supplier_update(self):
+        r = supplier_update(TesTSupplier.info)
+        result = json.loads(r)
+        self.assertEqual(result['status'], 'updated')
+
+
 
 
 # Path: stock_controller.py
