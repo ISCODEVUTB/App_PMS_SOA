@@ -68,5 +68,13 @@ class Cart(object):
     def price(self, price: int) -> None:
         self._price = price
 
-    def car_info(self, info: dict):
-        return f"This is a car {info}"
+    def car_info(self):
+        return {
+            "id_product": self.id_product,
+            "name": self.name,
+            "sup_name": self.sup_name,
+            "price": self.price,
+            "motor": self.motor,
+            "security": self.security,
+            "gearbox": self.gearbox
+        }

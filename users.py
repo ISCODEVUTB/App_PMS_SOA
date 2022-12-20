@@ -4,7 +4,6 @@ import json
 from flask_wtf.csrf import CSRFProtect
 import users_controller
 from app import connection
-from dotenv import load_dotenv
 
 # The access point is created
 server = Flask(__name__)
@@ -34,5 +33,4 @@ def user_update(info: dict):
 
 # the application is executed
 if __name__ == '__main__':
-    load_dotenv()
     server.run(debug=True, port=6000)

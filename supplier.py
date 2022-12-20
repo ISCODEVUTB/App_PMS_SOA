@@ -13,7 +13,7 @@ csrf.init_app(server)
 
 # The route to enter the service is created
 @server.get('/supplier')
-def index():
+def index_supplier():
     return supplier_contraller.show_supplier(connection())
 
 

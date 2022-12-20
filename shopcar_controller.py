@@ -14,12 +14,8 @@ def clear():
 
 def show_car():
     data = [(i.id_product, i.name, i.sup_name, i.price, i.motor, i.gearbox, i.security) for i in model]
-    if data is not None:
-        info = {'count': len(data), 'total_price': price_total()}
-        return json.dumps(info)
-    else:
-        info = {'count': 0, 'total_price': 0}
-        return json.dumps(info)
+    info = {'count': len(data), 'total_price': price_total()}
+    return json.dumps(info)
 
 
 def show_list():
@@ -44,9 +40,7 @@ def into_shop_car(mysql, id_product):
         info = {'listProduct': data, 'total_price': price_total(), 'Message': 'The product was successfully added',
                 'count': len(data)}
         return json.dumps(info)
-    else:
-        info = {'Message': 'The product was not added'}
-        return json.dumps(info)
+
 
 
 def price_total():

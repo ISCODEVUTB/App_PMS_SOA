@@ -1,9 +1,9 @@
 import unittest
 from stock_controller import stock, delete_stock, vehicle, create_stock, create_vehicle
 from app import connection
-from stock import index, get_vehicle, stock_delete, create_vehicle_stock, create_stock_
+from stock import index_stock, get_vehicle, stock_delete, create_vehicle_stock, create_stock_
 from supplier_contraller import show_supplier, delete_supplier, update_supplier
-from supplier import index, supplier_delete, supplier_update
+from supplier import index_supplier, supplier_delete, supplier_update
 from users_controller import all_user, get_user, update_user, create_user
 from users import all_users_, user, user_create, user_update
 from shopcar_controller import show_car, show_list, into_shop_car, clear
@@ -62,7 +62,7 @@ class TestStock(unittest.TestCase):
         self.assertEqual(result['message'], 'Stock deleted')
 
     def test_stock_index(self):
-        r = index()
+        r = index_stock()
         result = json.loads(r)
         if 'vehicles' in result:
             self.assertEqual(TestStock.info_test, TestStock.test_expected)
@@ -116,7 +116,7 @@ class TesTSupplier(unittest.TestCase):
         self.assertEqual(result['status'], 'updated')
 
     def test_show_supplier(self):
-        r = index()
+        r = index_supplier()
         result = json.loads(r)
         if 'suppliers' in result:
             self.assertEqual(TestStock.info_test, TestStock.test_expected)
@@ -256,8 +256,8 @@ class TestClassCar(unittest.TestCase):
     }
 
     def test_class_car(self):
-       result = self.info.car_info(TestClassCar.info_car)
-       self.assertEqual(result, f"This is a car {TestClassCar.info_car}")
+        result = self.info.car_info()
+        self.assertEqual(result, self.info_car)
 
 
 # Path: stock_controller.py

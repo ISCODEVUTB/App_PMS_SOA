@@ -13,7 +13,7 @@ csrf.init_app(server)
 
 # The route to enter the service is created.
 @server.get('/vehicles')
-def index():
+def index_stock():
     return stock_controller.stock(connection())
 
 
