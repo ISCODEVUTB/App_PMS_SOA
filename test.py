@@ -130,7 +130,7 @@ class TesTSupplier(unittest.TestCase):
 
 class TestUser(unittest.TestCase):
     info = {
-        "username": "Esneider2",
+        "username": "Esneider3",
         "email": "esneydergp69@gmail.com",
         "password": getenv("PASSWORD_2"),
     }
@@ -162,6 +162,11 @@ class TestUser(unittest.TestCase):
         if 'users' in result:
             self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
+    def test_get_user_controller(self):
+        r = get_user(connection(), TestUser.info)
+        result = json.loads(r)
+        if 'user' in result:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
     def test_update_user_controller(self):
         r = update_user(connection(), TestUser.info_update)
