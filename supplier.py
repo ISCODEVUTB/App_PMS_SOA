@@ -24,28 +24,19 @@ mysql = MySQL(server)
 # The route to enter the service is created
 @server.get('/supplier')
 def index():
-    try:
-        return supplier_contraller.show_supplier(mysql)
-    except Exception as error:
-        return jsonify({"Message": error})
+    return supplier_contraller.show_supplier(mysql)
 
 
 # this route is created to remove data from this service
 @server.delete('/supplier/<id>')
 def supplier_delete(id):
-    try:
-        return supplier_contraller.delete_supplier(mysql, id)
-    except ValueError:
-        return jsonify({"Message": "Error"})
+    return supplier_contraller.delete_supplier(mysql, id)
 
 
 # this route is created to update data of this service
 @server.put('/supplier/<id>')
 def supplier_update(id):
-    try:
-        return supplier_contraller.update_supplier(mysql, id)
-    except ValueError:
-        return jsonify({"message": "Error"})
+    return supplier_contraller.update_supplier(mysql, id)
 
 
 # the application is executed
