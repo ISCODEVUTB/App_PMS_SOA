@@ -245,7 +245,7 @@ class TestShopCar(unittest.TestCase):
 class TestClassCar(unittest.TestCase):
     info = Cart(id_product=6, name='Audi R8', sup_name='Audi', price=1000000, motor='V8', security='airbag',
                 gearbox='automatic')
-    info_car ={
+    info_car = {
         "id_product": 6,
         "name": "Audi R8",
         "sup_name": "Audi",
@@ -258,6 +258,7 @@ class TestClassCar(unittest.TestCase):
     def test_class_car(self):
        result = self.info.car_info(TestClassCar.info_car)
        self.assertEqual(result, f"This is a car {TestClassCar.info_car}")
+
 
 # Path: stock_controller.py
 if __name__ == '__main__':
