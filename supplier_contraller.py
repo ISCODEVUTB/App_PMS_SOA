@@ -8,14 +8,13 @@ def show_supplier(mysql):
     cursor.execute(
         "select idsupplier, name, nit, address, phone, email from supplier")
     data = cursor.fetchall()
-    if data != None:
-        list_supplier = []
-        for fila in data:
-            list_supplier_get = {'id_supplier': fila[0], 'name': fila[1], 'nit': fila[2], 'address': fila[3],
-                                 'phone': fila[4], 'email': fila[5]}
-            list_supplier.append(list_supplier_get)
-            info = {'vehicles': list_supplier}
-            return json.dumps(info)
+    list_supplier = []
+    for fila in data:
+        list_supplier_get = {'id_supplier': fila[0], 'name': fila[1], 'nit': fila[2], 'address': fila[3],
+                             'phone': fila[4], 'email': fila[5]}
+        list_supplier.append(list_supplier_get)
+        info = {'vehicles': list_supplier}
+        return json.dumps(info)
 
 
 # This function deletes a data from a supplier

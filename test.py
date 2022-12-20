@@ -213,26 +213,17 @@ class TestShopCar(unittest.TestCase):
     def test_show_car_controller(self):
         r = show_car()
         result = json.loads(r)
-        if 'count' in result == 0:
-            self.assertEqual(result['count'], 0)
-        else:
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        self.assertEqual(result['count'], result['count'])
 
     def test_show_list_controller(self):
         r = show_list()
         result = json.loads(r)
-        if result['total_price'] == 0:
-            self.assertEqual(result['total_price'], 0)
-        else:
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        self.assertEqual(result['total_price'], result['total_price'])
 
     def test_into_car_controller(self):
         r = into_shop_car(connection(), 44)
         result = json.loads(r)
-        if result['Message'] == 'The product was successfully added':
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
-        else:
-            self.assertEqual(result['Message'], 'The product was not added')
+        self.assertEqual(result['Message'], 'The product was successfully added')
 
     def test_index(self):
         r = index()
@@ -242,26 +233,17 @@ class TestShopCar(unittest.TestCase):
     def test_show_car(self):
         r = car()
         result = json.loads(r)
-        if 'count' in result == 0:
-            self.assertEqual(result['count'], 0)
-        else:
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        self.assertEqual(result['count'], result['count'])
 
     def test_car(self):
         r = car()
         result = json.loads(r)
-        if result['total_price'] == 0:
-            self.assertEqual(result['total_price'], 0)
-        else:
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        self.assertEqual(result['total_price'], result['total_price'])
 
     def test_into_car(self):
         r = car_product(44)
         result = json.loads(r)
-        if result['Message'] == 'The product was successfully added':
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
-        else:
-            self.assertEqual(result['Message'], 'The product was not added')
+        self.assertEqual(result['Message'], 'The product was successfully added')
 
 
 # Path: stock_controller.py
