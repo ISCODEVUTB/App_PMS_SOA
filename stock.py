@@ -31,18 +31,18 @@ def get_vehicle(id):
 
 # The route to create a new vehicle is created.
 @server.post('/vehicle')
-def create_vehicle():
+def create_vehicle_stock(info: dict):
     try:
-        return create_vehicle(connection())
+        return stock_controller.create_vehicle(connection(), info)
     except Exception as ex:
         return jsonify({'message': ex})
 
 
 # The route to create a new stock is created.
 @server.post('/stock')
-def create_stock():
+def create_stock_(info: dict):
     try:
-        return create_stock(connection())
+        return stock_controller.create_stock(connection(), info)
     except Exception as ex:
         return jsonify({'message': ex})
 
