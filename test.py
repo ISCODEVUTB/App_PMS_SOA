@@ -211,16 +211,16 @@ class TestShopCar(unittest.TestCase):
     def test_show_car_controller(self):
         r = show_car()
         result = json.loads(r)
-        if 'count' in result != 0:
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        if 'count' in result == 0:
+            self.assertEqual(result['count'], 0)
         else:
             self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
     def test_show_list_controller(self):
         r = show_list()
         result = json.loads(r)
-        if result['total_price'] != 0:
-            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        if result['total_price'] == 0:
+            self.assertEqual(result['total_price'], 0)
         else:
             self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
