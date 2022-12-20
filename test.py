@@ -194,7 +194,7 @@ class TestUser(unittest.TestCase):
         if 'user' in result:
             self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
-    def user_update(self):
+    def test_user_update(self):
         r = user_update(TestUser.info_update)
         result = json.loads(r)
         self.assertEqual(result['Message'], 'The user was successfully updated')
@@ -230,6 +230,11 @@ class TestShopCar(unittest.TestCase):
         r = index()
         result = json.loads(r)
         self.assertEqual(result['Welcome'], 'Welcome tu api car')
+
+    def test_show_car(self):
+        r = show()
+        result = json.loads(r)
+        self.assertEqual(result['count'], result['count'])
 
     def test_car(self):
         r = car()

@@ -30,16 +30,14 @@ def into_shop_car(mysql, id_product):
                    "from stock s inner join vehicle v on (s.name = v.id)"
                    "inner join supplier su on (s.supplier = su.idsupplier) where s.idstock = '{0}'".format(id_product))
     data = cursor.fetchall()
-    if data is not None:
-        for fila in data:
-            c = Cart(id_product=id_product, name=fila[0], sup_name=fila[1], price=fila[2], motor=fila[3],
-                     security=fila[5], gearbox=fila[4])
-            model.append(c)
-            print(data)
-        data = [(i.id_product, i.name, i.sup_name, i.price, i.motor, i.gearbox, i.security) for i in model]
-        info = {'listProduct': data, 'total_price': price_total(), 'Message': 'The product was successfully added',
-                'count': len(data)}
-        return json.dumps(info)
+    for fila in data:
+        c = Cart(id_product=id_product, name=fila[0], sup_name=fila[1], price=fila[2], motor=fila[3],
+                 security=fila[5], gearbox=fila[4])
+        model.append(c)
+    data = [(i.id_product, i.name, i.sup_name, i.price, i.motor, i.gearbox, i.security) for i in model]
+    info = {'listProduct': data, 'total_price': price_total(), 'Message': 'The product was successfully added',
+            'count': len(data)}
+    return json.dumps(info)
 
 
 

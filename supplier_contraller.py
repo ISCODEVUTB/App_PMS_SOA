@@ -13,8 +13,8 @@ def show_supplier(mysql):
         list_supplier_get = {'id_supplier': fila[0], 'name': fila[1], 'nit': fila[2], 'address': fila[3],
                              'phone': fila[4], 'email': fila[5]}
         list_supplier.append(list_supplier_get)
-        info = {'suppliers': list_supplier}
-        return json.dumps(info)
+    info = {'suppliers': list_supplier}
+    return json.dumps(info)
 
 
 # This function deletes a data from a supplier
