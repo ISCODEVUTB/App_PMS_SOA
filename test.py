@@ -149,7 +149,7 @@ class TestUser(unittest.TestCase):
     info_create = {
         "name": "Diego",
         "lastname": "Quintana",
-        "user": "DiegoQuintanaF",
+        "user": "DiegoQuintana",
         "email": "dquintana@utb.edu.co",
         "password": getenv("PASSWORD_2"),
         "rool": 4,
@@ -162,10 +162,6 @@ class TestUser(unittest.TestCase):
         if 'users' in result:
             self.assertEqual(TestStock.info_test, TestStock.test_expected)
 
-    def test_get_user_controller(self):
-        r = get_user(connection(), TestUser.info)
-        result = json.loads(r)
-        self.assertEqual(result['user']['username'], 'Esneider2')
 
     def test_update_user_controller(self):
         r = update_user(connection(), TestUser.info_update)
