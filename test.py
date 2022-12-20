@@ -10,6 +10,7 @@ from shopcar_controller import show_car, show_list, into_shop_car, clear
 from shopcar import index, car, car_product, show
 from os import getenv
 from dotenv import load_dotenv
+from logic.cart import Cart
 import json
 
 
@@ -230,11 +231,6 @@ class TestShopCar(unittest.TestCase):
         result = json.loads(r)
         self.assertEqual(result['Welcome'], 'Welcome tu api car')
 
-    def test_show_car(self):
-        r = car()
-        result = json.loads(r)
-        self.assertEqual(result['count'], result['count'])
-
     def test_car(self):
         r = car()
         result = json.loads(r)
@@ -245,6 +241,23 @@ class TestShopCar(unittest.TestCase):
         result = json.loads(r)
         self.assertEqual(result['Message'], 'The product was successfully added')
 
+
+class TestClassCar(unittest.TestCase):
+    info = Cart(id_product=6, name='Audi R8', sup_name='Audi', price=1000000, motor='V8', security='airbag',
+                gearbox='automatic')
+    info_car ={
+        "id_product": 6,
+        "name": "Audi R8",
+        "sup_name": "Audi",
+        "price": 1000000,
+        "motor": "V8",
+        "security": "airbag",
+        "gearbox": "automatic"
+    }
+
+    def test_class_car(self):
+       result = self.info.car_info(TestClassCar.info_car)
+       self.assertEqual(result, f"This is a car {TestClassCar.info_car}")
 
 # Path: stock_controller.py
 if __name__ == '__main__':
