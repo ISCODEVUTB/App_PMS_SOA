@@ -125,8 +125,6 @@ class TesTSupplier(unittest.TestCase):
         self.assertEqual(result['status'], 'updated')
 
 
-
-
 # Path: stock_controller.py
 if __name__ == '__main__':
     unittest.main()
