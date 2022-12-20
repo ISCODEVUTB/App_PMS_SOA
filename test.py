@@ -7,9 +7,11 @@ from supplier import index, supplier_delete, supplier_update
 from users_controller import all_user, get_user, update_user, create_user
 from users import all_users_, user, user_create, user_update
 from shopcar_controller import show_car, show_list, into_shop_car, clear
+from shopcar import index, car, car_product, show
 from os import getenv
 from dotenv import load_dotenv
 import json
+
 
 class TestStock(unittest.TestCase):
     info_test = "Test passed"
@@ -232,6 +234,34 @@ class TestShopCar(unittest.TestCase):
         else:
             self.assertEqual(result['Message'], 'The product was not added')
 
+    def test_index(self):
+        r = index()
+        result = json.loads(r)
+        self.assertEqual(result['Welcome'], 'Welcome tu api car')
+
+    def test_show_car(self):
+        r = car()
+        result = json.loads(r)
+        if 'count' in result == 0:
+            self.assertEqual(result['count'], 0)
+        else:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+
+    def test_car(self):
+        r = car()
+        result = json.loads(r)
+        if result['total_price'] == 0:
+            self.assertEqual(result['total_price'], 0)
+        else:
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+
+    def test_into_car(self):
+        r = car_product(44)
+        result = json.loads(r)
+        if result['Message'] == 'The product was successfully added':
+            self.assertEqual(TestStock.info_test, TestStock.test_expected)
+        else:
+            self.assertEqual(result['Message'], 'The product was not added')
 
 
 # Path: stock_controller.py
