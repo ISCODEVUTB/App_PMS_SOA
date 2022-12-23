@@ -248,8 +248,9 @@ class TestShopCar(unittest.TestCase):
 
 
 class TestClassCar(unittest.TestCase):
-    info = Cart(id_product=6, name='Audi R8', sup_name='Audi', price=1000000, motor='V8', security='airbag',
-                gearbox='automatic')
+    def setUp(self):
+        self.car = Cart(6, 'Audi R8', 'Audi', 1000000, 'V8', 'airbag', 'automatic')
+
     info_car = {
         "id_product": 6,
         "name": "Audi R8",
@@ -260,9 +261,36 @@ class TestClassCar(unittest.TestCase):
         "gearbox": "automatic"
     }
 
-    def test_class_car(self):
-        result = self.info.car_info()
-        self.assertEqual(result, self.info_car)
+    def test_class_car_info(self):
+        self.assertEqual(TestClassCar.info_car, self.car.car_info())
+
+    def test_class_id(self):
+        self.car.id_product = 7
+        self.assertEqual(7, self.car.id_product)
+
+    def test_class_name(self):
+        self.car.name = 'Audi R'
+        self.assertEqual('Audi R', self.car.name)
+
+    def test_class_sup_name(self):
+        self.car.sup_name = 'Audi'
+        self.assertEqual('Audi', self.car.sup_name)
+
+    def test_class_price(self):
+        self.car.price = 9000000
+        self.assertEqual(9000000, self.car.price)
+
+    def test_class_motor(self):
+        self.car.motor = 'V10'
+        self.assertEqual('V10', self.car.motor)
+
+    def test_class_security(self):
+        self.car.security = 'airbag 8'
+        self.assertEqual('airbag 8', self.car.security)
+
+    def test_class_gearbox(self):
+        self.car.gearbox = 'automatic 8'
+        self.assertEqual('automatic 8', self.car.gearbox)
 
 
 # Path: stock_controller.py

@@ -1,7 +1,7 @@
 class Cart(object):
 
     def __init__(self, id_product: int, name: str = "Name", sup_name: str = "Name", price: int = 0, motor: str = "Name",
-                 security: str = "Name", gearbox: str = "Name") -> None:
+                 security: str = "Name", gearbox: str = "Name"):
         """Cart builder object"""
 
         self._id_product = id_product
@@ -17,7 +17,7 @@ class Cart(object):
         return self._id_product
 
     @id_product.setter
-    def id_product(self, id_product: int) -> None:
+    def id_product(self, id_product: int):
         self._id_product = id_product
 
     @property
@@ -25,15 +25,23 @@ class Cart(object):
         return self._name
 
     @name.setter
-    def name(self, name: str) -> None:
+    def name(self, name: str):
         self._name = name
+
+    @property
+    def price(self) -> int:
+        return self._price
+
+    @price.setter
+    def price(self, price: int):
+        self._price = price
 
     @property
     def motor(self) -> str:
         return self._motor
 
     @motor.setter
-    def motor(self, motor: str) -> None:
+    def motor(self, motor: str):
         self._motor = motor
 
     @property
@@ -41,7 +49,7 @@ class Cart(object):
         return self._security
 
     @security.setter
-    def security(self, security: str) -> None:
+    def security(self, security: str):
         self._security = security
 
     @property
@@ -49,7 +57,7 @@ class Cart(object):
         return self._gearbox
 
     @gearbox.setter
-    def gearbox(self, gearbox: str) -> None:
+    def gearbox(self, gearbox: str):
         self._gearbox = gearbox
 
     @property
@@ -57,16 +65,8 @@ class Cart(object):
         return self._sup_name
 
     @sup_name.setter
-    def sup_name(self, sup_name: str) -> None:
+    def sup_name(self, sup_name: str):
         self._sup_name = sup_name
-
-    @property
-    def price(self) -> int:
-        return self._price
-
-    @price.setter
-    def price(self, price: int) -> None:
-        self._price = price
 
     def car_info(self):
         return {
